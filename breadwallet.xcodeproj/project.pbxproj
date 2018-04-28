@@ -689,6 +689,7 @@
 		6A915BD5208204CA004D2EBB /* sph_luffa.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sph_luffa.h; sourceTree = "<group>"; };
 		6A915BD6208204CA004D2EBB /* sph_simd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sph_simd.h; sourceTree = "<group>"; };
 		6A915BD7208204CA004D2EBB /* sph_groestl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sph_groestl.h; sourceTree = "<group>"; };
+		6AF061912084968600AE57C6 /* sph_bmw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sph_bmw.h; sourceTree = "<group>"; };
 		6AFDA4002082104F00CE5CFA /* BRBech32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRBech32.h; sourceTree = "<group>"; };
 		6AFDA4012082104F00CE5CFA /* BRBech32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BRBech32.c; sourceTree = "<group>"; };
 		7503773C1DF57428005EB8AE /* WalletManager+Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "WalletManager+Auth.swift"; path = "src/WalletManager+Auth.swift"; sourceTree = "<group>"; };
@@ -1338,7 +1339,7 @@
 		75A2A8111DA5936F00A983D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75A2A81C1DA5938500A983D8 /* NotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		75A2A81E1DA5938500A983D8 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
-		75A2A8201DA5938500A983D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		75A2A8201DA5938500A983D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../NotificationServiceExtension/Info.plist; sourceTree = "<group>"; };
 		75A2A8291DA59B2A00A983D8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Interface.strings; sourceTree = "<group>"; };
 		75A2A82A1DA59B2A00A983D8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		75A2A82B1DA59B2A00A983D8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainInterface.strings; sourceTree = "<group>"; };
@@ -2710,6 +2711,8 @@
 		75A2A7BC1DA5934300A983D8 /* breadwallet WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
+				6AF061912084968600AE57C6 /* sph_bmw.h */,
+				75A2A8201DA5938500A983D8 /* Info.plist */,
 				75A2A7BD1DA5934300A983D8 /* Interface.storyboard */,
 				75A2A7C01DA5934300A983D8 /* Assets.xcassets */,
 				75A2A7C21DA5934300A983D8 /* Info.plist */,
@@ -2793,7 +2796,6 @@
 			isa = PBXGroup;
 			children = (
 				75A2A81E1DA5938500A983D8 /* NotificationService.swift */,
-				75A2A8201DA5938500A983D8 /* Info.plist */,
 			);
 			path = NotificationServiceExtension;
 			sourceTree = "<group>";
