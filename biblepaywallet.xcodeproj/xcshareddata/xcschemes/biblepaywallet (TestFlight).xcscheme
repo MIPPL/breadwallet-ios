@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0830"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "75A2A78F1DA5934300A983D8"
-               BuildableName = "breadwallet.app"
-               BlueprintName = "breadwallet"
-               ReferencedContainer = "container:breadwallet.xcodeproj">
+               BuildableName = "biblepaywallet.app"
+               BlueprintName = "biblepaywallet"
+               ReferencedContainer = "container:biblepaywallet.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,19 +33,29 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "75A2A7A31DA5934300A983D8"
-               BuildableName = "breadwalletTests.xctest"
-               BlueprintName = "breadwalletTests"
-               ReferencedContainer = "container:breadwallet.xcodeproj">
+               BuildableName = "biblepaywalletTests.xctest"
+               BlueprintName = "biblepaywalletTests"
+               ReferencedContainer = "container:biblepaywallet.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "75A2A7AE1DA5934300A983D8"
-               BuildableName = "breadwalletUITests.xctest"
-               BlueprintName = "breadwalletUITests"
-               ReferencedContainer = "container:breadwallet.xcodeproj">
+               BuildableName = "biblepaywalletUITests.xctest"
+               BlueprintName = "biblepaywalletUITests"
+               ReferencedContainer = "container:biblepaywallet.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CEA7E67A1F09A9D2001F8C27"
+               BuildableName = "Screenshots.xctest"
+               BlueprintName = "Screenshots"
+               ReferencedContainer = "container:biblepaywallet.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,18 +63,19 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "75A2A78F1DA5934300A983D8"
-            BuildableName = "breadwallet.app"
-            BlueprintName = "breadwallet"
-            ReferencedContainer = "container:breadwallet.xcodeproj">
+            BuildableName = "biblepaywallet.app"
+            BlueprintName = "biblepaywallet"
+            ReferencedContainer = "container:biblepaywallet.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Testnet"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = "en"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -76,16 +87,23 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "75A2A78F1DA5934300A983D8"
-            BuildableName = "breadwallet.app"
-            BlueprintName = "breadwallet"
-            ReferencedContainer = "container:breadwallet.xcodeproj">
+            BuildableName = "biblepaywallet.app"
+            BlueprintName = "biblepaywallet"
+            ReferencedContainer = "container:biblepaywallet.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "OS_ACTIVITY_MODE"
+            value = "disable"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -95,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "75A2A78F1DA5934300A983D8"
-            BuildableName = "breadwallet.app"
-            BlueprintName = "breadwallet"
-            ReferencedContainer = "container:breadwallet.xcodeproj">
+            BuildableName = "biblepaywallet.app"
+            BlueprintName = "biblepaywallet"
+            ReferencedContainer = "container:biblepaywallet.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
@@ -105,7 +123,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Testflight"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
