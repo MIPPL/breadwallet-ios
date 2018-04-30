@@ -169,6 +169,27 @@ open class BRAPIClient : NSObject, URLSessionDelegate, URLSessionTaskDelegate, B
         return actualRequest
     }
     
+    public func synchronousDataTask(with url: URL) -> (Data?, URLResponse?, Error?) {
+        var data: Data?
+        var response: URLResponse?
+        var error: Error?
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        let dataTask = URLSession.shared.dataTask(with: url) {
+            data = $0
+            response = $1
+            error = $2
+            
+            semaphore.signal()
+        }
+        dataTask.resume()
+        
+        _ = semaphore.wait(timeout: .distantFuture)
+        
+        return (data, response, error)
+    }
+    
     public func dataTaskWithRequest(_ request: URLRequest, authenticated: Bool = false,
                              retryCount: Int = 0, handler: @escaping URLSessionTaskHandler) -> URLSessionDataTask {
         let start = Date()

@@ -13,7 +13,7 @@ class DefaultCurrencyViewController : UITableViewController, Subscriber {
     init(walletManager: WalletManager, store: Store) {
         self.walletManager = walletManager
         self.store = store
-        self.rates = store.state.rates.filter { $0.code != C.btcCurrencyCode }
+        self.rates = store.state.rates.filter { $0.code != C.btcCurrencyCode } 
         super.init(style: .plain)
     }
 
@@ -72,9 +72,13 @@ class DefaultCurrencyViewController : UITableViewController, Subscriber {
     }
 
     private func setExchangeRateLabel() {
-        if let currentRate = rates.filter({ $0.code == defaultCurrencyCode }).first {
-            let amount = Amount(amount: C.satoshis, rate: currentRate, maxDigits: store.state.maxDigits)
-            let bitsAmount = Amount(amount: C.satoshis, rate: currentRate, maxDigits: store.state.maxDigits)
+        let multiplier: UInt64 = 100    // 1 BBP still under 0.01
+        let BBPRate = rates.first( where: { $0.code == "BBP" }) ?? Rate(code: "BBP", name: "Biblepay", rate: 1)
+        
+        if let BTCRate = rates.filter({ $0.code == defaultCurrencyCode }).first {
+            let currentRate = Rate(code: BTCRate.code, name: BTCRate.name, rate: BTCRate.rate/BBPRate.rate)
+            let amount = Amount(amount: C.satoshis * multiplier, rate: currentRate, maxDigits: store.state.maxDigits)
+            let bitsAmount = Amount(amount: C.satoshis * multiplier, rate: currentRate, maxDigits: store.state.maxDigits)
             rateLabel.textColor = .darkText
             rateLabel.text = "\(bitsAmount.bits) = \(amount.string(forLocal: currentRate.locale))"
         }

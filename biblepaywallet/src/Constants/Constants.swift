@@ -34,7 +34,7 @@ struct C {
     static let maxMoney: UInt64 = 5100000000*100000000
     static let satoshis: UInt64 = 100000000
     static let walletQueue = "com.biblepaywallet.walletqueue"
-    static let btcCurrencyCode = "BBP"
+    static let btcCurrencyCode = "BTC"
     static let null = "(null)"
     static let maxMemoLength = 250
     static let feedbackEmail = "mobile@biblepay.org"

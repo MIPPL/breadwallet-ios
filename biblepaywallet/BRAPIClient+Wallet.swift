@@ -45,21 +45,24 @@ extension BRAPIClient {
         let task = dataTaskWithRequest(request) { (data, response, error) in
             if error == nil, let data = data,
                 let parsedData = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
-                let bbprate = self.FetchBBPRate()
-                if isFallback {
-                    guard var array = parsedData as? [Any] else {
-                        return handler([], "/rates didn't return an array")
+                self.FetchBBPRate() {
+                    bbprate in
+                    if isFallback {
+                        guard var array = parsedData as? [Any] else {
+                            return handler([], "/rates didn't return an array")
+                        }
+                        var compact: [Rate] = array.compactMap { data in Rate(data: data) }
+                        compact.append(Rate(code: "BBP", name: "Biblepay", rate: bbprate))
+                        handler(compact, nil)
+                    } else {
+                        guard let dict = parsedData as? [String: Any],
+                            var array = dict["body"] as? [Any] else {
+                                return self.exchangeRates(isFallback: true, handler)
+                        }
+                        var compact: [Rate] = array.compactMap { data in Rate(data: data) }
+                        compact.append(Rate(code: "BBP", name: "Biblepay", rate: bbprate))
+                        handler(compact, nil)
                     }
-                    
-                    array.append(Rate(code: "BBP", name: "Biblepay", rate: bbprate))
-                    handler(array.flatMap { Rate(data: $0) }, nil)
-                } else {
-                    guard let dict = parsedData as? [String: Any],
-                        var array = dict["body"] as? [Any] else {
-                            return self.exchangeRates(isFallback: true, handler)
-                    }
-                    array.append(Rate(code: "BBP", name: "Biblepay", rate: bbprate))
-                    handler(array.flatMap { Rate(data: $0) }, nil)
                 }
             } else {
                 if isFallback {
@@ -72,27 +75,26 @@ extension BRAPIClient {
         task.resume()
     }
     
-    func FetchBBPRate() -> Double
+    func FetchBBPRate( handler: @escaping (_ bbprate: Double) -> ())
     {
         let urlString = "https://api.coinmarketcap.com/v1/ticker/biblepay/"
         var ret = 1.0
         
-        guard let requestUrl = URL(string:urlString) else { return ret }
-        let request = URLRequest(url:requestUrl)
+        let requestUrl = URL(string:urlString)
+        let request = URLRequest(url:requestUrl!)
         let task = URLSession.shared.dataTask(with: request) {
             (data, response, error) in
             if error == nil,let usableData = data {
                 let json = try? JSONSerialization.jsonObject(with: usableData, options: []) as? [Any]
                 let bbpdata = json!?.first as? [String: Any]
-                guard let ratestr = bbpdata!["price_btc"] as? String else {
-                    return
-                }
+                guard let ratestr = bbpdata!["price_btc"] as? String else { return    }
                 let rate = Double(ratestr)
                 ret = 1 / rate!
             }
+            handler(ret)
         }
         task.resume()
-        return ret
+        
     }
     
     func savePushNotificationToken(_ token: Data) {

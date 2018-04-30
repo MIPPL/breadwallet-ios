@@ -17,18 +17,19 @@ class ExchangeUpdater : Subscriber {
         store.subscribe(self,
                         selector: { $0.defaultCurrencyCode != $1.defaultCurrencyCode },
                         callback: { state in
-                            guard let BBPRate = state.rates.first( where: { $0.code == "BBP" }) else { return }
+                            let BBPRate = state.rates.first( where: { $0.code == "BBP" }) ?? Rate(code: "BBP", name: "Biblepay", rate:1)
                             guard let BTCRate = state.rates.first( where: { $0.code == state.defaultCurrencyCode }) else { return }
-                            let currentRate = Rate(code: "BBP", name: "Biblepay", rate: BTCRate.rate/BBPRate.rate)
+                            let currentRate = Rate(code: BTCRate.code, name: BTCRate.name, rate: BTCRate.rate/BBPRate.rate)
                             self.store.perform(action: ExchangeRates.setRate(currentRate))
         })
     }
 
     func refresh(completion: @escaping () -> Void) {
         walletManager.apiClient?.exchangeRates { rates, error in
-            guard let BBPRate = rates.first( where: { $0.code == "BBP" }) else { completion(); return }
+            
+            let BBPRate = rates.first( where: { $0.code == "BBP" }) ?? Rate(code: "BBP", name: "Biblepay", rate: 1)
             guard let BTCRate = rates.first( where: { $0.code == self.store.state.defaultCurrencyCode }) else { completion(); return }
-            let currentRate = Rate(code: "BBP", name: "Biblepay", rate: BTCRate.rate/BBPRate.rate)
+            let currentRate = Rate(code: BTCRate.code, name: BTCRate.name, rate: BTCRate.rate/BBPRate.rate)
             self.store.perform(action: ExchangeRates.setRates(currentRate: currentRate, rates: rates))
             completion()
         }
