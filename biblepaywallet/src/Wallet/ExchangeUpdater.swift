@@ -17,14 +17,18 @@ class ExchangeUpdater : Subscriber {
         store.subscribe(self,
                         selector: { $0.defaultCurrencyCode != $1.defaultCurrencyCode },
                         callback: { state in
-                            guard let currentRate = state.rates.first( where: { $0.code == state.defaultCurrencyCode }) else { return }
+                            guard let BBPRate = state.rates.first( where: { $0.code == "BBP" }) else { return }
+                            guard let BTCRate = state.rates.first( where: { $0.code == state.defaultCurrencyCode }) else { return }
+                            let currentRate = Rate(code: "BBP", name: "Biblepay", rate: BTCRate.rate/BBPRate.rate)
                             self.store.perform(action: ExchangeRates.setRate(currentRate))
         })
     }
 
     func refresh(completion: @escaping () -> Void) {
         walletManager.apiClient?.exchangeRates { rates, error in
-            guard let currentRate = rates.first( where: { $0.code == self.store.state.defaultCurrencyCode }) else { completion(); return }
+            guard let BBPRate = rates.first( where: { $0.code == "BBP" }) else { completion(); return }
+            guard let BTCRate = rates.first( where: { $0.code == self.store.state.defaultCurrencyCode }) else { completion(); return }
+            let currentRate = Rate(code: "BBP", name: "Biblepay", rate: BTCRate.rate/BBPRate.rate)
             self.store.perform(action: ExchangeRates.setRates(currentRate: currentRate, rates: rates))
             completion()
         }

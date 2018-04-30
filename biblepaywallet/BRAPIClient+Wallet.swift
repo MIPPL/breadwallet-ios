@@ -45,16 +45,20 @@ extension BRAPIClient {
         let task = dataTaskWithRequest(request) { (data, response, error) in
             if error == nil, let data = data,
                 let parsedData = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
+                let bbprate = self.FetchBBPRate()
                 if isFallback {
-                    guard let array = parsedData as? [Any] else {
+                    guard var array = parsedData as? [Any] else {
                         return handler([], "/rates didn't return an array")
                     }
+                    
+                    array.append(Rate(code: "BBP", name: "Biblepay", rate: bbprate))
                     handler(array.flatMap { Rate(data: $0) }, nil)
                 } else {
                     guard let dict = parsedData as? [String: Any],
-                        let array = dict["body"] as? [Any] else {
+                        var array = dict["body"] as? [Any] else {
                             return self.exchangeRates(isFallback: true, handler)
                     }
+                    array.append(Rate(code: "BBP", name: "Biblepay", rate: bbprate))
                     handler(array.flatMap { Rate(data: $0) }, nil)
                 }
             } else {
@@ -66,6 +70,29 @@ extension BRAPIClient {
             }
         }
         task.resume()
+    }
+    
+    func FetchBBPRate() -> Double
+    {
+        let urlString = "https://api.coinmarketcap.com/v1/ticker/biblepay/"
+        var ret = 1.0
+        
+        guard let requestUrl = URL(string:urlString) else { return ret }
+        let request = URLRequest(url:requestUrl)
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
+            if error == nil,let usableData = data {
+                let json = try? JSONSerialization.jsonObject(with: usableData, options: []) as? [Any]
+                let bbpdata = json!?.first as? [String: Any]
+                guard let ratestr = bbpdata!["price_btc"] as? String else {
+                    return
+                }
+                let rate = Double(ratestr)
+                ret = 1 / rate!
+            }
+        }
+        task.resume()
+        return ret
     }
     
     func savePushNotificationToken(_ token: Data) {
