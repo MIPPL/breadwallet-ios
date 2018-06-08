@@ -253,7 +253,7 @@ public struct Currencies {
                              colors: (UIColor.gradientStart, UIColor.gradientEnd),
                              dbPath: "BreadWallet.sqlite",
                              forkId: 0,
-                             urlSchemes: ["NYXCoin"])
+                             urlSchemes: ["nyx"])
     static let bch = Bitcoin(name: "Bitcoin Cash",
                              code: "BCH",
                              symbol: S.Symbols.btc,
