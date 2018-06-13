@@ -30,8 +30,8 @@ class HomeScreenCell : UITableViewCell, Subscriber {
     
     static let cellIdentifier = "CurrencyCell"
 
-    private let currencyName = UILabel(font: .customBold(size: 18.0), color: .white)
-    private let price = UILabel(font: .customBold(size: 14.0), color: .transparentWhiteText)
+    private let currencyName = UILabel(font: .customBold(size: 32.0), color: .white)
+    private let price = UILabel(font: .customBold(size: 14.0), color: .white)
     private let fiatBalance = UILabel(font: .customBold(size: 18.0), color: .white)
     private let tokenBalance = UILabel(font: .customBold(size: 14.0), color: .transparentWhiteText)
     private let syncIndicator = SyncingIndicator(style: .home)
@@ -95,10 +95,10 @@ class HomeScreenCell : UITableViewCell, Subscriber {
     private func addSubviews() {
         contentView.addSubview(container)
         container.addSubview(currencyName)
-        container.addSubview(price)
-        container.addSubview(fiatBalance)
         container.addSubview(tokenBalance)
+        container.addSubview(fiatBalance)
         container.addSubview(syncIndicator)
+        container.addSubview(price)
         
         syncIndicator.isHidden = true
     }
@@ -109,31 +109,33 @@ class HomeScreenCell : UITableViewCell, Subscriber {
                                                            bottom: -C.padding[1],
                                                            right: -C.padding[2]))
         currencyName.constrain([
-            currencyName.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: C.padding[2]),
-            currencyName.topAnchor.constraint(equalTo: container.topAnchor, constant: C.padding[2])
+            currencyName.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            currencyName.topAnchor.constraint(equalTo: container.topAnchor, constant: C.padding[3]),
+            currencyName.bottomAnchor.constraint(equalTo: container.topAnchor, constant: C.padding[7])
             ])
-        price.constrain([
-            price.leadingAnchor.constraint(equalTo: currencyName.leadingAnchor),
-            price.topAnchor.constraint(equalTo: currencyName.bottomAnchor),
-            price.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -C.padding[2])
-            ])
-        fiatBalance.constrain([
-            fiatBalance.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -C.padding[2]),
-            fiatBalance.topAnchor.constraint(equalTo: container.topAnchor, constant: C.padding[2]),
-            fiatBalance.leadingAnchor.constraint(greaterThanOrEqualTo: currencyName.trailingAnchor, constant: C.padding[1])
-            ])
+        
         tokenBalance.constrain([
-            tokenBalance.trailingAnchor.constraint(equalTo: fiatBalance.trailingAnchor),
-            tokenBalance.topAnchor.constraint(equalTo: fiatBalance.bottomAnchor),
-            tokenBalance.leadingAnchor.constraint(greaterThanOrEqualTo: price.trailingAnchor, constant: C.padding[1]),
-            tokenBalance.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -C.padding[2])
+            tokenBalance.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            tokenBalance.topAnchor.constraint(equalTo: currencyName.bottomAnchor, constant: C.padding[1]),
+            tokenBalance.bottomAnchor.constraint(equalTo: currencyName.bottomAnchor, constant: C.padding[3])
+            ])
+        
+        fiatBalance.constrain([
+            fiatBalance.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            fiatBalance.topAnchor.constraint(equalTo: currencyName.bottomAnchor, constant: C.padding[4]),
+            fiatBalance.bottomAnchor.constraint(equalTo: currencyName.bottomAnchor, constant: C.padding[6])
+            ])
+        
+        price.constrain([
+            price.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -C.padding[1]),
+            price.topAnchor.constraint(equalTo: container.bottomAnchor, constant: -C.padding[4]),
+            price.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -C.padding[1]*0.5)
             ])
         
         syncIndicator.constrain([
-            syncIndicator.trailingAnchor.constraint(equalTo: fiatBalance.trailingAnchor),
-            syncIndicator.topAnchor.constraint(equalTo: fiatBalance.bottomAnchor),
-            syncIndicator.leadingAnchor.constraint(greaterThanOrEqualTo: price.trailingAnchor, constant: C.padding[1]),
-            syncIndicator.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -C.padding[2])
+            price.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -C.padding[1]),
+            syncIndicator.leadingAnchor.constraint(equalTo: price.leadingAnchor),
+            syncIndicator.bottomAnchor.constraint(equalTo: price.topAnchor, constant: -C.padding[1])
             ])
     }
 

@@ -16,7 +16,7 @@ class AccountHeaderView : UIView, GradientDrawable, Subscriber {
 
     // MARK: - Views
     
-    private let currencyName = UILabel(font: .customBody(size: 18.0))
+    private let currencyName = UILabel(font: .customBody(size: 32.0))
     private let exchangeRateLabel = UILabel(font: .customBody(size: 14.0))
     private let balanceLabel = UILabel(font: .customBody(size: 14.0))
     private let primaryBalance: UpdatingLabel
@@ -148,12 +148,16 @@ class AccountHeaderView : UIView, GradientDrawable, Subscriber {
 
     private func addConstraints() {
         currencyName.constrain([
-            currencyName.constraint(.leading, toView: self, constant: C.padding[2]),
-            currencyName.constraint(.trailing, toView: self, constant: -C.padding[2]),
+            currencyName.constraint(.leading, toView: self, constant: C.padding[5]),
+            //currencyName.constraint(.trailing, toView: self, constant: -C.padding[2]),
             currencyName.constraint(.top, toView: self, constant: E.isIPhoneX ? C.padding[5] : C.padding[3])
             ])
         
-        exchangeRateLabel.pinTo(viewAbove: currencyName)
+        //exchangeRateLabel.pinTo(viewAbove: currencyName)
+        exchangeRateLabel.constrain([
+            exchangeRateLabel.leadingAnchor.constraint(equalTo: currencyName.leadingAnchor, constant: 0.0),
+            exchangeRateLabel.topAnchor.constraint(equalTo: currencyName.bottomAnchor, constant: 0.0)
+            ])
         
         balanceLabel.constrain([
             balanceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -C.padding[2]),

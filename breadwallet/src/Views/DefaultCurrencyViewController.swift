@@ -147,7 +147,7 @@ class DefaultCurrencyViewController : UITableViewController, Subscriber {
             }
         }
 
-        bitcoinLabel.text = S.DefaultCurrency.bitcoinLabel
+        bitcoinLabel.text = S.DefaultCurrency.BitcoinLabel
         rateLabelTitle.text = S.DefaultCurrency.rateLabel
 
         self.header = header
