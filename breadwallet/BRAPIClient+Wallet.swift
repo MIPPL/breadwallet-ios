@@ -31,10 +31,10 @@ extension BRAPIClient {
         let param = code == Currencies.bch.code ? "?currency=bch" : ""
         let req = URLRequest(url: url("/fee-per-kb\(param)"))
         let task = self.dataTaskWithRequest(req) { (data, response, err) -> Void in
-            var regularFeePerKb: uint_fast64_t = 10000
-            var economyFeePerKb: uint_fast64_t = 5000
-            var errStr: String? = nil
-            if err == nil {
+            let regularFeePerKb: uint_fast64_t = 2000000
+            let economyFeePerKb: uint_fast64_t = 2000000
+            let errStr: String? = nil
+            /*if err == nil {
                 do {
                     let parsedObject: Any? = try JSONSerialization.jsonObject(
                         with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
@@ -48,7 +48,7 @@ extension BRAPIClient {
                 if regularFeePerKb == 0 || economyFeePerKb == 0 {
                     errStr = "invalid json"
                 }
-            } /*else {
+            } else {
                 self.log("fee-per-kb network error: \(String(describing: err))")
                 errStr = "bad network connection"
             }*/

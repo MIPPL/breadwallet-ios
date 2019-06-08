@@ -11,7 +11,7 @@ import XCTest
 import BRCore
 
 class FakeAuthenticator: WalletAuthenticator {
-    let secret: UInt256
+    var secret: UInt256
     let key: BRKey
     var userAccount: [AnyHashable: Any]? = nil
     
