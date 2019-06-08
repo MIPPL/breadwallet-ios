@@ -8,32 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		06C0C6C220B360C10047C540 /* x11.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6C020B360C00047C540 /* x11.c */; };
-		06C0C6E020B377250047C540 /* BRCoinAddr.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6C620B377240047C540 /* BRCoinAddr.c */; };
 		06C0C6E120B377250047C540 /* keccak.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6C820B377250047C540 /* keccak.c */; };
 		06C0C6E220B377250047C540 /* aes_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6CA20B377250047C540 /* aes_helper.c */; };
 		06C0C6E320B377250047C540 /* simd.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6CD20B377250047C540 /* simd.c */; };
 		06C0C6E420B377250047C540 /* luffa.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6CE20B377250047C540 /* luffa.c */; };
 		06C0C6E520B377250047C540 /* blake.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6CF20B377250047C540 /* blake.c */; };
-		06C0C6E620B377250047C540 /* cubehash.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6D520B377250047C540 /* cubehash.c */; };
-		06C0C6E720B377250047C540 /* jh.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6D620B377250047C540 /* jh.c */; };
-		06C0C6E820B377250047C540 /* shavite.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6D720B377250047C540 /* shavite.c */; };
 		06C0C6E920B377250047C540 /* groestl.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6D820B377250047C540 /* groestl.c */; };
 		06C0C6EA20B377250047C540 /* bmw.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6D920B377250047C540 /* bmw.c */; };
-		06C0C6EB20B377250047C540 /* skein.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6DE20B377250047C540 /* skein.c */; };
 		06C0C6EC20B377250047C540 /* echo.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6DF20B377250047C540 /* echo.c */; };
 		06C0C6F120B377980047C540 /* BRCoinAddr.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6F020B377980047C540 /* BRCoinAddr.c */; };
-		06C0C70B20B377B50047C540 /* keccak.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6F320B377B50047C540 /* keccak.c */; };
-		06C0C70C20B377B50047C540 /* aes_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6F520B377B50047C540 /* aes_helper.c */; };
-		06C0C70D20B377B50047C540 /* simd.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6F820B377B50047C540 /* simd.c */; };
-		06C0C70E20B377B50047C540 /* luffa.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6F920B377B50047C540 /* luffa.c */; };
-		06C0C70F20B377B50047C540 /* blake.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C6FA20B377B50047C540 /* blake.c */; };
 		06C0C71020B377B50047C540 /* cubehash.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C70020B377B50047C540 /* cubehash.c */; };
 		06C0C71120B377B50047C540 /* jh.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C70120B377B50047C540 /* jh.c */; };
 		06C0C71220B377B50047C540 /* shavite.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C70220B377B50047C540 /* shavite.c */; };
-		06C0C71320B377B50047C540 /* groestl.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C70320B377B50047C540 /* groestl.c */; };
-		06C0C71420B377B50047C540 /* bmw.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C70420B377B50047C540 /* bmw.c */; };
 		06C0C71520B377B50047C540 /* skein.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C70920B377B50047C540 /* skein.c */; };
-		06C0C71620B377B50047C540 /* echo.c in Sources */ = {isa = PBXBuildFile; fileRef = 06C0C70A20B377B50047C540 /* echo.c */; };
 		1B1AFFA01FB7EF7C00E61908 /* BiometricsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1AFF9E1FB7EF7C00E61908 /* BiometricsSettingsViewController.swift */; };
 		1B1AFFA11FB7EF7C00E61908 /* BiometricsSpendingLimitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1AFF9F1FB7EF7C00E61908 /* BiometricsSpendingLimitViewController.swift */; };
 		22122B721F0B8996000E9AB9 /* BRAPIClient+Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22122B711F0B8996000E9AB9 /* BRAPIClient+Events.swift */; };
@@ -236,10 +223,8 @@
 		75A2A79B1DA5934300A983D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75A2A79A1DA5934300A983D8 /* Assets.xcassets */; };
 		75A2A79E1DA5934300A983D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75A2A79C1DA5934300A983D8 /* LaunchScreen.storyboard */; };
 		75A2A7B41DA5934300A983D8 /* breadwalletUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A2A7B31DA5934300A983D8 /* breadwalletUITests.swift */; };
-		75A2A7B91DA5934300A983D8 /* breadwallet WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 75A2A7B81DA5934300A983D8 /* breadwallet WatchKit App.app */; };
 		75A2A7BF1DA5934300A983D8 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75A2A7BD1DA5934300A983D8 /* Interface.storyboard */; };
 		75A2A7C11DA5934300A983D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75A2A7C01DA5934300A983D8 /* Assets.xcassets */; };
-		75A2A7C81DA5934300A983D8 /* breadwallet WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 75A2A7C71DA5934300A983D8 /* breadwallet WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		75A2A7CF1DA5934300A983D8 /* BalanceInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A2A7CE1DA5934300A983D8 /* BalanceInterfaceController.swift */; };
 		75A2A7D11DA5934300A983D8 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A2A7D01DA5934300A983D8 /* ExtensionDelegate.swift */; };
 		75A2A7D31DA5934300A983D8 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A2A7D21DA5934300A983D8 /* NotificationController.swift */; };
@@ -563,20 +548,6 @@
 			remoteGlobalIDString = 75A2A78F1DA5934300A983D8;
 			remoteInfo = breadwallet;
 		};
-		75A2A7BA1DA5934300A983D8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 75A2A7881DA5934300A983D8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 75A2A7B71DA5934300A983D8;
-			remoteInfo = "breadwallet WatchKit App";
-		};
-		75A2A7C91DA5934300A983D8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 75A2A7881DA5934300A983D8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 75A2A7C61DA5934300A983D8;
-			remoteInfo = "breadwallet WatchKit Extension";
-		};
 		75A2A8121DA5936F00A983D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 75A2A7881DA5934300A983D8 /* Project object */;
@@ -637,7 +608,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				75A2A7C81DA5934300A983D8 /* breadwallet WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -648,7 +618,6 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				75A2A7B91DA5934300A983D8 /* breadwallet WatchKit App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3758,7 +3727,6 @@
 			);
 			dependencies = (
 				759DA0BD1DAC369C008CC49B /* PBXTargetDependency */,
-				75A2A7BB1DA5934300A983D8 /* PBXTargetDependency */,
 				75A2A8131DA5936F00A983D8 /* PBXTargetDependency */,
 				75A2A8221DA5938500A983D8 /* PBXTargetDependency */,
 				22A9A99C1DF63426000F0016 /* PBXTargetDependency */,
@@ -3815,7 +3783,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				75A2A7CA1DA5934300A983D8 /* PBXTargetDependency */,
 			);
 			name = "breadwallet WatchKit App";
 			productName = "breadwallet WatchKit App";
@@ -3935,7 +3902,7 @@
 			attributes = {
 				CLASSPREFIX = BR;
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "breadwallet LLC";
 				TargetAttributes = {
 					22A9A9951DF63426000F0016 = {
@@ -4033,7 +4000,7 @@
 			};
 			buildConfigurationList = 75A2A78B1DA5934300A983D8 /* Build configuration list for PBXProject "breadwallet" */;
 			compatibilityVersion = "Xcode 8.0";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -4050,6 +4017,12 @@
 				pt,
 				ko,
 				"zh-Hant",
+				sv,
+				nb,
+				pl,
+				tr,
+				hu,
+				el,
 			);
 			mainGroup = 75A2A7871DA5934300A983D8;
 			productRefGroup = 75A2A7911DA5934300A983D8 /* Products */;
@@ -4317,7 +4290,6 @@
 				755CD9E71DAA1A270075898E /* BRTransaction.c in Sources */,
 				7CF11628205C943800C03D42 /* BREthereumWallet.c in Sources */,
 				06C0C6E220B377250047C540 /* aes_helper.c in Sources */,
-				06C0C70C20B377B50047C540 /* aes_helper.c in Sources */,
 				06C0C71020B377B50047C540 /* cubehash.c in Sources */,
 				06C0C6EC20B377250047C540 /* echo.c in Sources */,
 				06C0C6EA20B377250047C540 /* bmw.c in Sources */,
@@ -4325,7 +4297,6 @@
 				06C0C6E920B377250047C540 /* groestl.c in Sources */,
 				755CD9E41DAA1A270075898E /* BRPeer.c in Sources */,
 				7CF11621205C943800C03D42 /* BREthereumTransaction.c in Sources */,
-				06C0C70E20B377B50047C540 /* luffa.c in Sources */,
 				06C0C71520B377B50047C540 /* skein.c in Sources */,
 				755CD9DD1DAA1A270075898E /* BRBIP38Key.c in Sources */,
 				06C0C6E320B377250047C540 /* simd.c in Sources */,
@@ -4335,38 +4306,27 @@
 				7CF1161B205C943800C03D42 /* BREthereumToken.c in Sources */,
 				7CF11620205C943800C03D42 /* BREthereumGas.c in Sources */,
 				755CD9DA1DAA1A270075898E /* BRAddress.c in Sources */,
-				06C0C6E720B377250047C540 /* jh.c in Sources */,
-				06C0C70B20B377B50047C540 /* keccak.c in Sources */,
 				7CF11622205C943800C03D42 /* BREthereumAmount.c in Sources */,
 				755CD9DB1DAA1A270075898E /* BRBase58.c in Sources */,
 				75C468AA2056E5F800113F92 /* BRBech32.c in Sources */,
-				06C0C71320B377B50047C540 /* groestl.c in Sources */,
-				06C0C71620B377B50047C540 /* echo.c in Sources */,
-				06C0C6E020B377250047C540 /* BRCoinAddr.c in Sources */,
-				06C0C6EB20B377250047C540 /* skein.c in Sources */,
 				06C0C6E520B377250047C540 /* blake.c in Sources */,
 				3C83B27620631739001D08CE /* BRRlpCoder.c in Sources */,
 				3C83B27820631740001D08CE /* BRUtilMathParse.c in Sources */,
 				06C0C6C220B360C10047C540 /* x11.c in Sources */,
 				755CD9DF1DAA1A270075898E /* BRBloomFilter.c in Sources */,
-				06C0C70F20B377B50047C540 /* blake.c in Sources */,
 				7CF1161C205C943800C03D42 /* BREthereumAccount.c in Sources */,
 				755CD9DE1DAA1A270075898E /* BRBIP39Mnemonic.c in Sources */,
 				755CD9E11DAA1A270075898E /* BRKey.c in Sources */,
-				06C0C70D20B377B50047C540 /* simd.c in Sources */,
 				755CD9E51DAA1A270075898E /* BRPeerManager.c in Sources */,
 				755CD9E31DAA1A270075898E /* BRPaymentProtocol.c in Sources */,
 				755CD9E01DAA1A270075898E /* BRCrypto.c in Sources */,
 				755CD9E61DAA1A270075898E /* BRSet.c in Sources */,
 				755CD9E21DAA1A270075898E /* BRMerkleBlock.c in Sources */,
-				06C0C6E620B377250047C540 /* cubehash.c in Sources */,
 				06C0C71220B377B50047C540 /* shavite.c in Sources */,
 				7CF1161E205C943800C03D42 /* BREthereumLightNode.c in Sources */,
 				755CD9DC1DAA1A270075898E /* BRBIP32Sequence.c in Sources */,
 				759B4BDF203E5A32002C68CA /* BRBCashAddr.c in Sources */,
 				3C83B27720631740001D08CE /* BRUtilMath.c in Sources */,
-				06C0C71420B377B50047C540 /* bmw.c in Sources */,
-				06C0C6E820B377250047C540 /* shavite.c in Sources */,
 				7CF11623205C943800C03D42 /* BREthereumEther.c in Sources */,
 				755CD9E81DAA1A270075898E /* BRWallet.c in Sources */,
 			);
@@ -4796,16 +4756,6 @@
 			isa = PBXTargetDependency;
 			target = 75A2A78F1DA5934300A983D8 /* breadwallet */;
 			targetProxy = 75A2A7B01DA5934300A983D8 /* PBXContainerItemProxy */;
-		};
-		75A2A7BB1DA5934300A983D8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 75A2A7B71DA5934300A983D8 /* breadwallet WatchKit App */;
-			targetProxy = 75A2A7BA1DA5934300A983D8 /* PBXContainerItemProxy */;
-		};
-		75A2A7CA1DA5934300A983D8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 75A2A7C61DA5934300A983D8 /* breadwallet WatchKit Extension */;
-			targetProxy = 75A2A7C91DA5934300A983D8 /* PBXContainerItemProxy */;
 		};
 		75A2A8131DA5936F00A983D8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -5363,11 +5313,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "breadwallet WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.watchkitapp.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.watchkitapp.extension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -5381,11 +5331,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "breadwallet WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.watchkitapp.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.watchkitapp.extension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -5400,11 +5350,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				ENABLE_BITCODE = YES;
 				IBSC_MODULE = breadwallet_WatchKit_Extension;
 				INFOPLIST_FILE = "breadwallet WatchKit App/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -5418,11 +5368,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				ENABLE_BITCODE = YES;
 				IBSC_MODULE = breadwallet_WatchKit_Extension;
 				INFOPLIST_FILE = "breadwallet WatchKit App/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -5438,12 +5388,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Internal";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				INFOPLIST_FILE = breadwallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DDebug";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -5458,12 +5408,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				INFOPLIST_FILE = breadwallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -5475,7 +5425,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = breadwalletTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.voisine.breadwalletTests;
@@ -5490,7 +5440,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = breadwalletTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.voisine.breadwalletTests;
@@ -5504,7 +5454,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = breadwalletUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.watchkitapp;
@@ -5518,7 +5468,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = breadwalletUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.watchkitapp;
@@ -5532,7 +5482,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -5546,7 +5496,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -5560,10 +5510,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = TodayExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.TodayExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.TodayExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -5573,10 +5523,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = TodayExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.TodayExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.TodayExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -5585,11 +5535,11 @@
 		75A2A8251DA5938500A983D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.NotificationServiceExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -5599,11 +5549,11 @@
 		75A2A8261DA5938500A983D8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.NotificationServiceExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -5640,7 +5590,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				DEVELOPMENT_TEAM = 4R7S6N88W9;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = Screenshots/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -5655,7 +5605,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				DEVELOPMENT_TEAM = 4R7S6N88W9;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = Screenshots/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -5670,7 +5620,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				DEVELOPMENT_TEAM = 4R7S6N88W9;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = Screenshots/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -5752,12 +5702,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Internal";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				INFOPLIST_FILE = breadwallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DDebug -DScreenshots -DTestnet";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -5770,7 +5720,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = breadwalletTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.voisine.breadwalletTests;
@@ -5784,7 +5734,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = breadwalletUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.watchkitapp;
@@ -5799,11 +5749,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				ENABLE_BITCODE = YES;
 				IBSC_MODULE = breadwallet_WatchKit_Extension;
 				INFOPLIST_FILE = "breadwallet WatchKit App/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -5816,11 +5766,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "breadwallet WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.watchkitapp.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.watchkitapp.extension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -5834,7 +5784,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -5848,10 +5798,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = TodayExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.TodayExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.TodayExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -5860,11 +5810,11 @@
 		CEA7E6901F09AC6A001F8C27 /* Screenshots */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.NotificationServiceExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -5980,7 +5930,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				DEVELOPMENT_TEAM = 4R7S6N88W9;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = Screenshots/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -6062,12 +6012,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Internal";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				INFOPLIST_FILE = breadwallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DDebug -DTestnet";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -6080,7 +6030,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = breadwalletTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.voisine.breadwalletTests;
@@ -6094,7 +6044,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = breadwalletUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.watchkitapp;
@@ -6109,11 +6059,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				ENABLE_BITCODE = YES;
 				IBSC_MODULE = breadwallet_WatchKit_Extension;
 				INFOPLIST_FILE = "breadwallet WatchKit App/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -6126,11 +6076,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "breadwallet WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.watchkitapp.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.watchkitapp.extension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -6144,7 +6094,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -6158,10 +6108,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = TodayExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.TodayExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.TodayExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -6170,11 +6120,11 @@
 		CEA7E6A31F0AAA84001F8C27 /* Testnet */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.NotificationServiceExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -6290,7 +6240,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				DEVELOPMENT_TEAM = 4R7S6N88W9;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = Screenshots/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -6365,12 +6315,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Internal";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = breadwallet/breadwallet.entitlements;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				INFOPLIST_FILE = breadwallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DTestflight -DDebug";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -6382,7 +6332,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = breadwalletTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.voisine.breadwalletTests;
@@ -6396,7 +6346,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = breadwalletUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.watchkitapp;
@@ -6411,11 +6361,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				ENABLE_BITCODE = YES;
 				IBSC_MODULE = breadwallet_WatchKit_Extension;
 				INFOPLIST_FILE = "breadwallet WatchKit App/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -6428,11 +6378,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "breadwallet WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.watchkitapp.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.watchkitapp.extension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -6446,7 +6396,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -6460,10 +6410,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = TodayExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.TodayExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.TodayExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -6472,11 +6422,11 @@
 		CEE0EF5C1EBF8D7F0018DB36 /* Testflight */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = QC6288YCNV;
+				DEVELOPMENT_TEAM = CSZ4WJT8ZH;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaywallet.NotificationServiceExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.biblepaymobile.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
