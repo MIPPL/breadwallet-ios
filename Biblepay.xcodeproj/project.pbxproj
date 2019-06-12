@@ -3998,7 +3998,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 75A2A78B1DA5934300A983D8 /* Build configuration list for PBXProject "breadwallet" */;
+			buildConfigurationList = 75A2A78B1DA5934300A983D8 /* Build configuration list for PBXProject "Biblepay" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -6608,7 +6608,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		75A2A78B1DA5934300A983D8 /* Build configuration list for PBXProject "breadwallet" */ = {
+		75A2A78B1DA5934300A983D8 /* Build configuration list for PBXProject "Biblepay" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				75A2A7D91DA5934400A983D8 /* Debug */,

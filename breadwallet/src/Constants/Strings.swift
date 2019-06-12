@@ -49,7 +49,7 @@ enum S {
     }
 
     enum Scanner {
-        static let flashButtonLabel = NSLocalizedString("Scanner.flashButtonLabel", value:"Camera Flash", comment: "Scan bitcoin address camera flash toggle")
+        static let flashButtonLabel = NSLocalizedString("Scanner.flashButtonLabel", value:"Camera Flash", comment: "Scan Biblepay address camera flash toggle")
     }
 
     enum Send {
@@ -71,7 +71,7 @@ enum S {
         static let containsAddress = NSLocalizedString("Send.containsAddress", value: "The destination is your own address. You cannot send to yourself.", comment: "Warning when sending to self.")
         enum UsedAddress {
             static let title = NSLocalizedString("Send.UsedAddress.title", value: "Address Already Used", comment: "Adress already used alert title")
-            static let firstLine = NSLocalizedString("Send.UsedAddress.firstLine", value: "Bitcoin addresses are intended for single use only.", comment: "Adress already used alert message - first part")
+            static let firstLine = NSLocalizedString("Send.UsedAddress.firstLine", value: "Biblepay addresses are intended for single use only.", comment: "Adress already used alert message - first part")
             static let secondLine = NSLocalizedString("Send.UsedAddress.secondLIne", value: "Re-use reduces privacy for both you and the recipient and can result in loss if the recipient doesn't directly control the address.", comment: "Adress already used alert message - second part")
         }
         static let identityNotCertified = NSLocalizedString("Send.identityNotCertified", value: "Payee identity isn't certified.", comment: "Payee identity not certified alert title.")
@@ -86,7 +86,7 @@ enum S {
         static let ethSendSelf = NSLocalizedString("Send.ethSendSelf", value: "Can't send to self.", comment: "Can't send to self erorr message")
         static let nilFeeError = NSLocalizedString("Send.nilFeeError", value: "Insufficient funds to cover the transaction fee.", comment: "Transaction fee could not be be caluculated error.")
         static let noFeesError = NSLocalizedString("Send.noFeesError", value: "Network Fee conditions are being downloaded. Please try again.", comment: "No Fees error")
-        static let legacyAddressWarning = NSLocalizedString("Send.legacyAddressWarning", value: "Warning: this is a legacy bitcoin address. Are you sure you want to send Bitcoin Cash to it?", comment: "Attempting to send to ")
+        static let legacyAddressWarning = NSLocalizedString("Send.legacyAddressWarning", value: "Warning: this is a legacy Biblepay address. Are you sure you want to send Bitcoin Cash to it?", comment: "Attempting to send to ")
         static let insufficientGasTitle = NSLocalizedString("Send.insufficientGasTitle", value: "Insufficient Ethereum Balance", comment: "Insufficient gas alert title")
         static let insufficientGasMessage = NSLocalizedString("Send.insufficientGasMessage", value: "You must have at least %1$@ in your wallet in order to transfer this type of token. Would you like to go to your Ethereum wallet now?", comment: "Insufficient gas alert message")
     }
@@ -107,8 +107,8 @@ enum S {
 
     enum JailbreakWarnings {
         static let title = NSLocalizedString("JailbreakWarnings.title", value:"WARNING", comment: "Jailbreak warning title")
-        static let messageWithBalance = NSLocalizedString("JailbreakWarnings.messageWithBalance", value:"DEVICE SECURITY COMPROMISED\n Any 'jailbreak' app can access Biblepay's keychain data and steal your bitcoin! Wipe this wallet immediately and restore on a secure device.", comment: "Jailbreak warning message")
-        static let messageWithoutBalance = NSLocalizedString("JailbreakWarnings.messageWithoutBalance", value:"DEVICE SECURITY COMPROMISED\n Any 'jailbreak' app can access Biblepay's keychain data and steal your bitcoin. Please only use Biblepay on a non-jailbroken device.", comment: "Jailbreak warning message")
+        static let messageWithBalance = NSLocalizedString("JailbreakWarnings.messageWithBalance", value:"DEVICE SECURITY COMPROMISED\n Any 'jailbreak' app can access Biblepay's keychain data and steal your Biblepay! Wipe this wallet immediately and restore on a secure device.", comment: "Jailbreak warning message")
+        static let messageWithoutBalance = NSLocalizedString("JailbreakWarnings.messageWithoutBalance", value:"DEVICE SECURITY COMPROMISED\n Any 'jailbreak' app can access Biblepay's keychain data and steal your Biblepay. Please only use Biblepay on a non-jailbroken device.", comment: "Jailbreak warning message")
         static let ignore = NSLocalizedString("JailbreakWarnings.ignore", value:"Ignore", comment: "Ignore jailbreak warning button")
         static let wipe = NSLocalizedString("JailbreakWarnings.wipe", value:"Wipe", comment: "Wipe wallet button")
         static let close = NSLocalizedString("JailbreakWarnings.close", value:"Close", comment: "Close app button")
@@ -201,7 +201,7 @@ enum S {
             static let touchIdTitle = NSLocalizedString("SecurityCenter.touchIdTitle", value:"Touch ID", comment: "Touch ID button title")
             static let touchIdDescription = NSLocalizedString("SecurityCenter.touchIdDescription", value:"Conveniently unlock your Biblepay and send money up to a set limit.", comment: "Touch ID/FaceID button description")
             static let paperKeyTitle = NSLocalizedString("SecurityCenter.paperKeyTitle", value:"Paper Key", comment: "Paper Key button title")
-            static let paperKeyDescription = NSLocalizedString("SecurityCenter.paperKeyDescription", value:"The only way to access your bitcoin if you lose or upgrade your phone.", comment: "Paper Key button description")
+            static let paperKeyDescription = NSLocalizedString("SecurityCenter.paperKeyDescription", value:"The only way to access your Biblepay if you lose or upgrade your phone.", comment: "Paper Key button description")
             static let faceIdTitle = NSLocalizedString("SecurityCenter.faceIdTitle", value:"Face ID", comment: "Face ID button title")
         }
     }
@@ -214,7 +214,7 @@ enum S {
         static let enterCurrent = NSLocalizedString("UpdatePin.enterCurrent", value:"Enter your current PIN.", comment: "Enter current PIN instruction")
         static let enterNew = NSLocalizedString("UpdatePin.enterNew", value:"Enter your new PIN.", comment: "Enter new PIN instruction")
         static let reEnterNew = NSLocalizedString("UpdatePin.reEnterNew", value:"Re-Enter your new PIN.", comment: "Re-Enter new PIN instruction")
-        static let caption = NSLocalizedString("UpdatePin.caption", value:"Remember this PIN. If you forget it, you won't be able to access your bitcoin.", comment: "Update PIN caption text")
+        static let caption = NSLocalizedString("UpdatePin.caption", value:"Remember this PIN. If you forget it, you won't be able to access your Biblepay.", comment: "Update PIN caption text")
         static let setPinErrorTitle = NSLocalizedString("UpdatePin.setPinErrorTitle", value:"Update PIN Error", comment: "Update PIN failure alert view title")
         static let setPinError = NSLocalizedString("UpdatePin.setPinError", value:"Sorry, could not update PIN.", comment: "Update PIN failure error message.")
     }
@@ -293,7 +293,7 @@ enum S {
         static let currencySettings = NSLocalizedString("Settings.currencySettings", value: "Currency Settings", comment: "Currency settings section header")
         static let other = NSLocalizedString("Settings.other", value: "Other", comment: "Other settings section header")
         static let advanced = NSLocalizedString("Settings.advanced", value: "Advanced", comment: "Advanced settings header")
-        static let currencyPageTitle = NSLocalizedString("Settings.currencyPageTitle", value: "%1$@ Settings", comment: "Bitcoin Settings page title")
+        static let currencyPageTitle = NSLocalizedString("Settings.currencyPageTitle", value: "%1$@ Settings", comment: "Biblepay Settings page title")
         static let importTile = NSLocalizedString("Settings.importTitle", value:"Redeem Private Key", comment: "Import wallet label")
         static let notifications = NSLocalizedString("Settings.notifications", value:"Notifications", comment: "Notifications label")
         static let touchIdLimit = NSLocalizedString("Settings.touchIdLimit", value:"Touch ID Spending Limit", comment: "Touch ID spending limit label")
@@ -332,7 +332,7 @@ enum S {
 
     enum DefaultCurrency {
         static let rateLabel = NSLocalizedString("DefaultCurrency.rateLabel", value:"Exchange Rate", comment: "Exchange rate label")
-        static let bitcoinLabel = NSLocalizedString("DefaultCurrency.bitcoinLabel", value: "Bitcoin Display Unit", comment: "Bitcoin denomination picker label")
+        static let bitcoinLabel = NSLocalizedString("DefaultCurrency.bitcoinLabel", value: "Biblepay Display Unit", comment: "Biblepay denomination picker label")
     }
 
     enum SyncingView {
@@ -381,7 +381,7 @@ enum S {
     }
 
     enum RequestAnAmount {
-        static let title = NSLocalizedString("RequestAnAmount.title", value:"Request an Amount", comment: "Request a specific amount of bitcoin")
+        static let title = NSLocalizedString("RequestAnAmount.title", value:"Request an Amount", comment: "Request a specific amount of Biblepay")
         static let noAmount = NSLocalizedString("RequestAnAmount.noAmount", value: "Please enter an amount first.", comment: "No amount entered error message.")
     }
 
@@ -401,7 +401,7 @@ enum S {
         static let support = NSLocalizedString("MenuButton.support", value:"Support", comment: "Menu button title")
         static let settings = NSLocalizedString("MenuButton.settings", value:"Settings", comment: "Menu button title")
         static let lock = NSLocalizedString("MenuButton.lock", value:"Lock Wallet", comment: "Menu button title")
-        static let buy = NSLocalizedString("MenuButton.buy", value:"Buy Bitcoin", comment: "Buy bitcoin title")
+        static let buy = NSLocalizedString("MenuButton.buy", value:"Buy Biblepay", comment: "Buy Biblepay title")
         static let addWallet = NSLocalizedString("MenuButton.addWallet", value: "Add Wallet", comment: "Add Wallet button title")
     }
     
@@ -414,7 +414,7 @@ enum S {
     enum StartViewController {
         static let createButton = NSLocalizedString("StartViewController.createButton", value:"Create New Wallet", comment: "button label")
         static let recoverButton = NSLocalizedString("StartViewController.recoverButton", value:"Recover Wallet", comment: "button label")
-        static let message = NSLocalizedString("StartViewController.message", value: "The easy and secure way to use bitcoin.", comment: "Start view message")
+        static let message = NSLocalizedString("StartViewController.message", value: "The easy and secure way to use Biblepay.", comment: "Start view message")
     }
 
     enum AccessibilityLabels {
@@ -473,8 +473,8 @@ enum S {
             static let requestExpired = NSLocalizedString("PaymentProtocol.Errors.requestExpired", value: "request expired", comment: "Request expired payment protocol error message")
             static let badPaymentRequest = NSLocalizedString("PaymentProtocol.Errors.badPaymentRequest", value: "Bad Payment Request", comment: "Bad Payment request alert title")
             static let smallOutputErrorTitle = NSLocalizedString("PaymentProtocol.Errors.smallOutputError", value: "Couldn't make payment", comment: "Payment too small alert title")
-            static let smallPayment = NSLocalizedString("PaymentProtocol.Errors.smallPayment", value: "Bitcoin payments can't be less than %1$@.", comment: "Amount too small error message")
-            static let smallTransaction = NSLocalizedString("PaymentProtocol.Errors.smallTransaction", value: "Bitcoin transaction outputs can't be less than %1$@.", comment: "Output too small error message.")
+            static let smallPayment = NSLocalizedString("PaymentProtocol.Errors.smallPayment", value: "Biblepay payments can't be less than %1$@.", comment: "Amount too small error message")
+            static let smallTransaction = NSLocalizedString("PaymentProtocol.Errors.smallTransaction", value: "Biblepay transaction outputs can't be less than %1$@.", comment: "Output too small error message.")
             static let corruptedDocument = NSLocalizedString("PaymentProtocol.Errors.corruptedDocument", value: "Unsupported or corrupted document", comment: "Error opening payment protocol file message")
         }
     }
@@ -523,7 +523,7 @@ enum S {
         static let scan = NSLocalizedString("Import.scan", value: "Scan Private Key", comment: "Scan Private key button label")
         static let title = NSLocalizedString("Import.title", value: "Import Wallet", comment: "Import Wallet screen title")
         static let importing = NSLocalizedString("Import.importing", value: "Importing Wallet", comment: "Importing wallet progress view label")
-        static let confirm = NSLocalizedString("Import.confirm", value: "Send %1$@ from this private key into your wallet? The bitcoin network will receive a fee of %2$@.", comment: "Sweep private key confirmation message")
+        static let confirm = NSLocalizedString("Import.confirm", value: "Send %1$@ from this private key into your wallet? The Biblepay network will receive a fee of %2$@.", comment: "Sweep private key confirmation message")
         static let checking = NSLocalizedString("Import.checking", value: "Checking private key balance...", comment: "Checking private key balance progress view text")
         static let password = NSLocalizedString("Import.password", value: "This private key is password protected.", comment: "Enter password alert view title")
         static let passwordPlaceholder = NSLocalizedString("Import.passwordPlaceholder", value: "password", comment: "password textfield placeholder")
@@ -543,7 +543,7 @@ enum S {
 
     enum BitID {
         static let title = NSLocalizedString("BitID.title", value: "BitID Authentication Request", comment: "BitID Authentication Request alert view title")
-        static let authenticationRequest = NSLocalizedString("BitID.authenticationRequest", value: "%1$@ is requesting authentication using your bitcoin wallet", comment: "<sitename> is requesting authentication using your bitcoin wallet")
+        static let authenticationRequest = NSLocalizedString("BitID.authenticationRequest", value: "%1$@ is requesting authentication using your Biblepay wallet", comment: "<sitename> is requesting authentication using your Biblepay wallet")
         static let deny = NSLocalizedString("BitID.deny", value: "Deny", comment: "Deny button label")
         static let approve = NSLocalizedString("BitID.approve", value: "Approve", comment: "Approve button label")
         static let success = NSLocalizedString("BitID.success", value: "Successfully Authenticated", comment: "BitID success alert title")
@@ -589,7 +589,7 @@ enum S {
     enum NodeSelector {
         static let manualButton = NSLocalizedString("NodeSelector.manualButton", value: "Switch to Manual Mode", comment: "Switch to manual mode button label")
         static let automaticButton = NSLocalizedString("NodeSelector.automaticButton", value: "Switch to Automatic Mode", comment: "Switch to automatic mode button label")
-        static let title = NSLocalizedString("NodeSelector.title", value: "Bitcoin Nodes", comment: "Node Selector view title")
+        static let title = NSLocalizedString("NodeSelector.title", value: "Biblepay Nodes", comment: "Node Selector view title")
         static let nodeLabel = NSLocalizedString("NodeSelector.nodeLabel", value: "Current Primary Node", comment: "Node address label")
         static let statusLabel = NSLocalizedString("NodeSelector.statusLabel", value: "Node Connection Status", comment: "Node status label")
         static let connected = NSLocalizedString("NodeSelector.connected", value: "Connected", comment: "Node is connected label")

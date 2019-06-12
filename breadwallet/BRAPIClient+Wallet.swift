@@ -31,8 +31,8 @@ extension BRAPIClient {
         let param = code == Currencies.bch.code ? "?currency=bch" : ""
         let req = URLRequest(url: url("/fee-per-kb\(param)"))
         let task = self.dataTaskWithRequest(req) { (data, response, err) -> Void in
-            let regularFeePerKb: uint_fast64_t = 2000000
-            let economyFeePerKb: uint_fast64_t = 2000000
+            let regularFeePerKb: uint_fast64_t = 1500000
+            let economyFeePerKb: uint_fast64_t = 1500000
             let errStr: String? = nil
             /*if err == nil {
                 do {
