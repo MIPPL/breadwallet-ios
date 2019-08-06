@@ -182,16 +182,19 @@ extension BRAPIClient {
     }
 
     func fetchUTXOS(address: String, currency: CurrencyDef, completion: @escaping ([[String: Any]]?)->Void) {
-        let path = "http://explorer.biblepay-central.org/ext/getutxos/\(address)"
+        let path = "https://chainz.cryptoid.info/bbp/api.dws?key=7f15255edf68&q=unspent&active=\(address)";
         var req = URLRequest(url: URL(string: path)!)
         req.httpMethod = "GET"
         //req.httpBody = "addrs=\(address)".data(using: .utf8)
         dataTaskWithRequest(req, handler: { data, resp, error in
             guard error == nil else { completion(nil); return }
-            guard let data = data,
-                let jsonData = try? JSONSerialization.jsonObject(with: data, options: []),
-                let json = jsonData as? [[String: Any]] else { completion(nil); return }
-                completion(json)
+            if  let data = data,
+                let jsonData = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] {
+                if let utxos = jsonData["unspent_outputs"] as? [[String: Any]] {
+                    completion(utxos)
+                }
+            }
+            else { completion(nil); return }
         }).resume()
     }
 }
