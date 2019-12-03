@@ -12,7 +12,7 @@ extension UIColor {
 
     // MARK: Buttons
     static var primaryButton: UIColor {
-        return UIColor(red: 194.0/255.0, green: 12.0/255.0, blue: 34.0/255.0, alpha: 1.0)
+        return UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
     }
 
     static var primaryText: UIColor {
@@ -66,11 +66,11 @@ extension UIColor {
 
     // MARK: Gradient
     static var gradientStart: UIColor {
-        return UIColor(red: 194.0/255.0, green: 12.0/255.0, blue: 34.0/255.0, alpha: 1.0)
+        return UIColor(red: 245.0/255.0, green: 220.0/255.0, blue: 65.0/255.0, alpha: 1.0)
     }
 
     static var gradientEnd: UIColor {
-        return UIColor(red: 67.0/255.0, green: 66/255.0, blue: 66.0/255.0, alpha: 1.0)
+        return UIColor(red: 223.0/255.0, green: 170/255.0, blue: 26.0/255.0, alpha: 1.0)
     }
 
     static var offWhite: UIColor {
@@ -210,7 +210,7 @@ extension UIColor {
     }
     
     static var statusIndicatorActive: UIColor {
-        return UIColor(red: 194.0/255.0, green: 12.0/255.0, blue: 34.0/255.0, alpha: 1.0)
+        return UIColor(red: 223.0/255.0, green: 170/255.0, blue: 26.0/255.0, alpha: 1.0)
     }
     
     static var grayBackground: UIColor {

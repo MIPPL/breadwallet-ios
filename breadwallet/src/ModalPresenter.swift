@@ -224,7 +224,7 @@ class ModalPresenter : Subscriber, Trackable {
                 case ArticleIds.walletDisabled:
                     aId = "articles/360035353391-Why-is-my-wallet-disabled-"
                 case ArticleIds.receiveBitcoin:
-                    aId = "articles/360035353511-How-do-I-receive-Wagerr-WGR-";
+                    aId = "articles/360035353511-How-do-I-receive-Bitradio-WGR-";
                 case ArticleIds.setPin:
                     aId = "/articles/360035353791-Why-do-i-need-a-PIN-";
                 case ArticleIds.enableTouchId:
@@ -238,17 +238,17 @@ class ModalPresenter : Subscriber, Trackable {
                      ArticleIds.recoverWallet:
                     aId = "articles/360035353811-What-is-a-recovery-key-";
                 case ArticleIds.importWallet:
-                    aId = "articles/360034979472-What-happens-when-I-import-a-Wagerr-private-key-";
+                    aId = "articles/360034979472-What-happens-when-I-import-a-Bitradio-private-key-";
                 case ArticleIds.displayCurrency:
-                    aId = "articles/360035353871-How-does-the-Wagerr-wallet-app-show-my-balance-in-my-local-currency-";
+                    aId = "articles/360035353871-How-does-the-Bitradio-wallet-app-show-my-balance-in-my-local-currency-";
                 case ArticleIds.reScan:
-                    aId = "articles/360034979492-When-should-I-re-sync-my-Wagerr-wallet-with-the-blockchain-";
+                    aId = "articles/360034979492-When-should-I-re-sync-my-Bitradio-wallet-with-the-blockchain-";
                 case ArticleIds.securityCenter:
                     aId = "articles/360035353831-What-is-the-Security-Center-";
                 case ArticleIds.sendBitcoin:
-                    aId = "articles/360034979232-How-can-I-send-Wagerr-WGR-";
+                    aId = "articles/360034979232-How-can-I-send-Bitradio-WGR-";
                 case ArticleIds.requestAmount:
-                    aId = "articles/360034983592-How-do-I-use-the-Request-an-Amount-screen-in-my-Wagerr-wallet-";
+                    aId = "articles/360034983592-How-do-I-use-the-Request-an-Amount-screen-in-my-Bitradio-wallet-";
                 //case ArticleIds.betSlip:
                 //    aId = "articles/360035358891-Betting-Slip";
                 default:
@@ -257,7 +257,7 @@ class ModalPresenter : Subscriber, Trackable {
         } else {
             aId = "categories/360002247832-Mobile-Application";
         }
-        url = "https://wagerr.zendesk.com/hc/en-us/\(aId)"
+        url = "https://bitradio.zendesk.com/hc/en-us/\(aId)"
 
         supportCenter.navigate(to: url)        // bypass support
         //topViewController?.present(supportCenter, animated: true, completion: {})
@@ -386,7 +386,7 @@ class ModalPresenter : Subscriber, Trackable {
                 guard let `self` = self else { return }
                 let sections = [SettingsSections.currency]
                 var currencySettings = [SettingsSections: [Setting]]()
-                if currency is Wagerr {
+                if currency is Bitcoin {
                     currencySettings = [
                         SettingsSections.currency: [
                             Setting(title: S.Settings.importTile, callback: {

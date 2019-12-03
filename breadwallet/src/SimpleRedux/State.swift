@@ -137,7 +137,7 @@ struct WalletState {
     let currentRate: Rate?
     let fees: Fees?
     let recommendRescan: Bool
-    let maxDigits: Int // this is bits vs wagerr setting
+    let maxDigits: Int // this is bits vs bitradio setting
     let connectionStatus: BRPeerStatus
     
     

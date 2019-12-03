@@ -5,43 +5,43 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Wagerr</string>
+	<string>Bitradio</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleTypeIconFiles</key>
 			<array/>
 			<key>CFBundleTypeName</key>
-			<string>Wagerr Payment Request</string>
+			<string>Bitradio Payment Request</string>
 			<key>LSHandlerRank</key>
 			<string>None</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>wagerr.paymentrequest</string>
+				<string>Bitradio.paymentrequest</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeIconFiles</key>
 			<array/>
 			<key>CFBundleTypeName</key>
-			<string>Wagerr Payment</string>
+			<string>Bitradio Payment</string>
 			<key>LSHandlerRank</key>
 			<string>None</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>wagerr.payment</string>
+				<string>Bitradio.payment</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeIconFiles</key>
 			<array/>
 			<key>CFBundleTypeName</key>
-			<string>Wagerr Payment ACK</string>
+			<string>Bitradio Payment ACK</string>
 			<key>LSHandlerRank</key>
 			<string>None</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>wagerr.paymentack</string>
+				<string>bitradio.paymentack</string>
 			</array>
 		</dict>
 	</array>
@@ -74,10 +74,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>wagerr</string>
+			<string>Bitradio</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wagerr</string>
+				<string>Bitradio</string>
 			</array>
 		</dict>
 		<dict>
@@ -170,13 +170,13 @@
 				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Wagerr Payment Request</string>
+			<string>Bitradio Payment Request</string>
 			<key>UTTypeIdentifier</key>
-			<string>wagerr.paymentrequest</string>
+			<string>Bitradio.paymentrequest</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.mime-type</key>
-				<string>application/wagerr-paymentrequest</string>
+				<string>application/Bitradio-paymentrequest</string>
 			</dict>
 		</dict>
 		<dict>
@@ -185,13 +185,13 @@
 				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Wagerr Payment</string>
+			<string>Bitradio Payment</string>
 			<key>UTTypeIdentifier</key>
-			<string>wagerr.payment</string>
+			<string>Bitradio.payment</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.mime-type</key>
-				<string>application/wagerr-payment</string>
+				<string>application/Bitradio-payment</string>
 			</dict>
 		</dict>
 		<dict>
@@ -200,13 +200,13 @@
 				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Wagerr Payment ACK</string>
+			<string>Bitradio Payment ACK</string>
 			<key>UTTypeIdentifier</key>
-			<string>wagerr.paymentack</string>
+			<string>Bitradio.paymentack</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.mime-type</key>
-				<string>application/wagerr-paymentack</string>
+				<string>application/Bitradio-paymentack</string>
 			</dict>
 		</dict>
 	</array>

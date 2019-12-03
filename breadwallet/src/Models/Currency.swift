@@ -104,14 +104,14 @@ public struct TokenUnit: CurrencyUnit {
 
 /// MARK: - Currency Definitions
 
-/// Wagerr-compatible currency type
-public struct Wagerr: CurrencyDef {
+/// Bitcoin-compatible currency type
+public struct Bitcoin: CurrencyDef {
     
     public enum Units: Int, CurrencyUnit {
         case satoshi = 0
         case bit = 2
         case millibitcoin = 5
-        case wagerr = 8 // 1 Satoshi = 1e-8 BTC
+        case Bitcoin = 8 // 1 Satoshi = 1e-8 BTC
     }
     
     public let name: String
@@ -123,7 +123,7 @@ public struct Wagerr: CurrencyDef {
     public let urlSchemes: [String]?
     
     public var commonUnit: CurrencyUnit {
-        return Units.wagerr
+        return Units.Bitcoin
     }
     
     public func isValidAddress(_ address: String) -> Bool {
@@ -156,7 +156,7 @@ public struct Wagerr: CurrencyDef {
             return (self.code == Currencies.btc.code) ? "bits" : "μ\(code.uppercased())"
         case .millibitcoin:
             return "m\(code.uppercased())"
-        case .wagerr:
+        case .Bitcoin:
             return code.uppercased()
         }
     }
@@ -168,7 +168,7 @@ public struct Wagerr: CurrencyDef {
             return S.Symbols.bits
         case .millibitcoin:
             return "m\(symbol)"
-        case .wagerr:
+        case .Bitcoin:
             return symbol
         default:
             return name(forUnit: unit)
@@ -247,14 +247,14 @@ extension ERC20Token {
 // MARK: Instances
 
 public struct Currencies {
-    static let btc = Wagerr(name: "Wagerr",
-                             code: "WGR",
+    static let btc = Bitcoin(name: "Bitradio",
+                             code: "BRO",
                              symbol: S.Symbols.btc,
                              colors: (UIColor.gradientStart, UIColor.gradientEnd),
                              dbPath: "BreadWallet.sqlite",
                              forkId: 0,
-                             urlSchemes: ["wagerr"])
-    static let bch = Wagerr(name: "Bitcoin Cash",
+                             urlSchemes: ["bitradio"])
+    static let bch = Bitcoin(name: "Bitcoin Cash",
                              code: "BCH",
                              symbol: S.Symbols.btc,
                              colors: (UIColor(red:0.278431, green:0.521569, blue:0.349020, alpha:1.0), UIColor(red:0.278431, green:0.521569, blue:0.349020, alpha:1.0)),

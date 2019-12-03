@@ -95,7 +95,7 @@ extension BRAPIClient {
     }
 
     func FetchCoinRate(_ handler: @escaping (RatesResult) -> Void) {
-        let urlString = "https://api.crex24.com/CryptoExchangeService/BotPublic/ReturnTicker?request=[NamePairs=BTC_WGR]";
+        let urlString = "https://api.coingecko.com/api/v3/simple/price?ids=bitradio&vs_currencies=BTC";
         var ret = [Rate]()
         
         guard let requestUrl = URL(string:urlString) else { return handler(.error("Coin rate not found")) }
@@ -104,28 +104,18 @@ extension BRAPIClient {
             (data, response, error) in
             if error == nil,let usableData = data {
                 
-                struct Crex24TickerItem : Codable {
-                    var PairId : integer_t!
-                    var PairName : String!
-                    var Last : double_t!
-                    var LowPrice: double_t!
-                    var HighPrice: double_t!
-                    var PercentChange: double_t!
-                    var BaseVolume: double_t!
-                    var QuoteVolume: double_t!
-                    var VolumeInBtc: double_t!
-                    var VolumeInUsd: double_t!
+                struct CGTickerItem : Codable {
+                    var btc : double_t!
                 }
                 
-                struct Crex24TickerObject : Codable {
-                    var Error : String!
-                    var Tickers : [Crex24TickerItem]!
+                struct CGTickerObject : Codable {
+                    var bitradio : CGTickerItem!
                 }
                 
                 do {
                     let decoder = JSONDecoder()
-                    let objData = try decoder.decode(Crex24TickerObject.self, from: usableData)
-                    let coinrate = objData.Tickers[0].Last;
+                    let objData = try decoder.decode(CGTickerObject.self, from: usableData)
+                    let coinrate = objData.bitradio.btc;
                     ret.append(Rate(code: Currencies.btc.code, name: Currencies.btc.name, rate: coinrate!, reciprocalCode:"BTC"))
                     handler(.success(ret))
                 }
@@ -205,7 +195,7 @@ extension BRAPIClient {
     }
 
     func fetchUTXOS(address: String, currency: CurrencyDef, completion: @escaping ([[String: Any]]?)->Void) {
-        let path = "https://chainz.cryptoid.info/wgr/api.dws?key=552651714eae&q=unspent&active=\(address)";
+        let path = "https://chainz.cryptoid.info/bro/api.dws?key=552651714eae&q=unspent&active=\(address)";
         var req = URLRequest(url: URL(string: path)!)
         req.httpMethod = "GET"
         //req.httpBody = "addrs=\(address)".data(using: .utf8)

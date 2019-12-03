@@ -148,7 +148,7 @@ class ConfirmationViewController : UIViewController, ContentBoxPresenter {
         address.text = addressText
         address.lineBreakMode = .byTruncatingMiddle
         
-        if currency is Wagerr {
+        if currency is Bitcoin {
             switch feeType {
             case .regular:
                 processingTime.text = String(format: S.Confirmation.processingTime, S.FeeSelector.regularTime)

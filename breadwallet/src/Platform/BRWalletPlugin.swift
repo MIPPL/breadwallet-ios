@@ -255,7 +255,7 @@ class BRWalletPlugin: BRHTTPRouterPlugin, BRWebSocketClient, Trackable {
         //      {
         //          "id": "BTC" // ticker code
         //          "ticker": "BTC"
-        //          "name": "Wagerr"
+        //          "name": "Bitradio"
         //          "balance": {
         //              "numerator": "10000",
         //              "denominator": "100000000",

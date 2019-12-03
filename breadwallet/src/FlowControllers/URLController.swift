@@ -84,7 +84,7 @@ class URLController : Trackable {
     private func isBitcoinUri(url: URL, uri: String?) -> URL? {
         guard let uri = uri else { return nil }
         guard let bitcoinUrl = URL(string: uri) else { return nil }
-        if (url.host == "wagerr-uri" || url.path == "/wagerr-uri") && bitcoinUrl.scheme == "wagerr" {
+        if (url.host == "bitradio-uri" || url.path == "/bitradio-uri") && bitcoinUrl.scheme == "bitradio" {
             return url
         } else {
             return nil

@@ -100,19 +100,19 @@ class AboutViewController : UIViewController {
 
     private func setActions() {
         blog.button.tap = strongify(self) { myself in
-            myself.presentURL(string: "https://www.wagerr.com/")
+            myself.presentURL(string: "https://bitrad.io/")
         }
         twitter.button.tap = strongify(self) { myself in
-            myself.presentURL(string: "https://twitter.com/wagerrx")
+            myself.presentURL(string: "https://twitter.com/bitrad_io")
         }
         reddit.button.tap = strongify(self) { myself in
-            myself.presentURL(string: "https://www.reddit.com/r/Wagerr/")
+            myself.presentURL(string: "https://www.reddit.com/r/Bitradio/")
         }
         telegram.button.tap = strongify(self) { myself in
-            myself.presentURL(string: "https://t.me/wagerrcoin")
+            myself.presentURL(string: "https://t.me/bitradio")
         }
         privacy.tap = strongify(self) { myself in
-            myself.presentURL(string: "https://github.com/wagerr/WagerrWalletAndroid/blob/master/PrivacyPolicy.md")
+            myself.presentURL(string: "https://github.com/wagerr/BitradioWallet/blob/master/PrivacyPolicy.md")
         }
     }
 
