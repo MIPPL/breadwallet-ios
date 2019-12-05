@@ -155,13 +155,54 @@ class StartImportViewController : UIViewController {
     }
 
     private func checkBalance(key: BRKey) {
-        present(balanceActivity, animated: true, completion: {
+        //present(balanceActivity, animated: true, completion: {
             var key = key
             guard let address = key.address() else { return }
+
             self.walletManager.apiClient?.fetchUTXOS(address: address, currency: self.currency, completion: { data in
                 guard let data = data else { return }
                 self.handleData(data: data, key: key)
             })
+        //})
+    }
+
+    private func handleData(outputs: [SimpleUTXO], key: BRKey) {
+        var key = key
+        guard let tx = UnsafeMutablePointer<BRTransaction>() else { return }
+        guard let wallet = walletManager.wallet else { return }
+        guard let address = key.address() else { return }
+        guard let fees = Currencies.btc.state?.fees else { return }
+        guard !wallet.containsAddress(address) else {
+            return showErrorMessage(S.Import.Error.duplicate)
+        }
+
+        let balance = outputs.map { $0.satoshis }.reduce(0, +)
+        outputs.forEach { output in
+            tx.addInput(txHash: output.hash, index: output.index, amount: output.satoshis, script: output.script)
+        }
+
+        let pubKeyLength = key.pubKey()?.count ?? 0
+        walletManager.wallet?.feePerKb = fees.regular
+        let fee = wallet.feeForTxSize(tx.size + 34 + (pubKeyLength - 34)*tx.inputs.count)
+        balanceActivity.dismiss(animated: true, completion: {
+            guard outputs.count > 0 && balance > 0 else {
+                return self.showErrorMessage(S.Import.Error.empty)
+            }
+            guard fee + wallet.minOutputAmount <= balance else {
+                return self.showErrorMessage(S.Import.Error.highFees)
+            }
+            guard let rate = Currencies.btc.state?.currentRate else { return }
+            let balanceAmount = Amount(amount: UInt256(balance), currency: Currencies.btc, rate: rate)
+            let feeAmount = Amount(amount: UInt256(fee), currency: Currencies.btc, rate: rate)
+            let balanceText = Store.state.isBtcSwapped ? balanceAmount.fiatDescription : balanceAmount.tokenDescription
+            let feeText = Store.state.isBtcSwapped ? feeAmount.fiatDescription : feeAmount.tokenDescription
+            let message = String(format: S.Import.confirm, balanceText, feeText)
+            let alert = UIAlertController(title: S.Import.title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: S.Button.cancel, style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: S.Import.importButton, style: .default, handler: { _ in
+                self.publish(tx: tx, balance: balance, fee: fee, key: key)
+            }))
+            self.present(alert, animated: true, completion: nil)
         })
     }
 

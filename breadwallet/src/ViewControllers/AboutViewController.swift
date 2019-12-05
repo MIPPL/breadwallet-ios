@@ -51,7 +51,7 @@ class AboutViewController : UIViewController {
             logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logo.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: C.padding[3]),
             logo.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
-            logo.heightAnchor.constraint(equalTo: logo.widthAnchor, multiplier: 162.0/553.0) ])
+            logo.heightAnchor.constraint(equalTo: logo.widthAnchor, multiplier: 162.0/772.0) ])
         //logo.constrain(toSuperviewEdges: nil)
         /*
         walletID.constrain([
@@ -112,7 +112,7 @@ class AboutViewController : UIViewController {
             myself.presentURL(string: "https://t.me/bitradio")
         }
         privacy.tap = strongify(self) { myself in
-            myself.presentURL(string: "https://github.com/wagerr/BitradioWallet/blob/master/PrivacyPolicy.md")
+            myself.presentURL(string: "https://bitrad.io/privacy-ioswallet/")
         }
     }
 

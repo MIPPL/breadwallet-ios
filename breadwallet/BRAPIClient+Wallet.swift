@@ -100,33 +100,33 @@ extension BRAPIClient {
         
         guard let requestUrl = URL(string:urlString) else { return handler(.error("Coin rate not found")) }
         let request = URLRequest(url:requestUrl)
-        let task = URLSession.shared.dataTask(with: request) {
-            (data, response, error) in
-            if error == nil,let usableData = data {
-                
-                struct CGTickerItem : Codable {
-                    var btc : double_t!
-                }
-                
-                struct CGTickerObject : Codable {
-                    var bitradio : CGTickerItem!
-                }
-                
-                do {
-                    let decoder = JSONDecoder()
-                    let objData = try decoder.decode(CGTickerObject.self, from: usableData)
-                    let coinrate = objData.bitradio.btc;
-                    ret.append(Rate(code: Currencies.btc.code, name: Currencies.btc.name, rate: coinrate!, reciprocalCode:"BTC"))
-                    handler(.success(ret))
-                }
-                catch let ex{
-                    handler(.error(ex.localizedDescription))
+            let task = URLSession.shared.dataTask(with: request) {
+                (data, response, error) in
+                if error == nil,let usableData = data {
+                    
+                    struct CGTickerItem : Codable {
+                        var btc : double_t!
+                    }
+                    
+                    struct CGTickerObject : Codable {
+                        var bitradio : CGTickerItem!
+                    }
+                    
+                    do {
+                        let decoder = JSONDecoder()
+                        let objData = try decoder.decode(CGTickerObject.self, from: usableData)
+                        let coinrate = objData.bitradio.btc;
+                        ret.append(Rate(code: Currencies.btc.code, name: Currencies.btc.name, rate: coinrate!, reciprocalCode:"BTC"))
+                        handler(.success(ret))
+                    }
+                    catch let ex{
+                        handler(.error(ex.localizedDescription))
+                    }
                 }
             }
-        }
- 
-        task.resume()
-        handler(.success(ret))
+     
+            task.resume()
+            handler(.success(ret))
         return
     }
 
@@ -196,9 +196,29 @@ extension BRAPIClient {
 
     func fetchUTXOS(address: String, currency: CurrencyDef, completion: @escaping ([[String: Any]]?)->Void) {
         let path = "https://chainz.cryptoid.info/bro/api.dws?key=552651714eae&q=unspent&active=\(address)";
+        
         var req = URLRequest(url: URL(string: path)!)
         req.httpMethod = "GET"
         //req.httpBody = "addrs=\(address)".data(using: .utf8)
+        /*
+        let task = URLSession.shared.dataTask(with: req) {
+           (data, response, error) in
+           if error == nil,let usableData = data {
+               do {
+                    let decoder = JSONDecoder()
+                    let objData = try decoder.decode(ChainzObject.self, from: usableData)
+                    let chainzUtxos : [ChainzUtxoItem] = objData.unspent_outputs;
+                let utxos : [SimpleUTXO] = chainzUtxos.map({$0.ToSimpleUTXO()!})
+                    completion(utxos)
+               }
+               catch let ex{
+                   completion(nil); return
+               }
+           }
+        }
+        task.resume()
+       */
+        
         dataTaskWithRequest(req, handler: { data, resp, error in
             guard error == nil else { completion(nil); return }
             if  let data = data,
@@ -209,6 +229,7 @@ extension BRAPIClient {
             }
             else { completion(nil); return }
         }).resume()
+ 
     }
 }
 

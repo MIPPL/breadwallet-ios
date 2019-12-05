@@ -29,6 +29,7 @@ class HomeScreenViewController : UIViewController, Subscriber, Trackable {
     var didSelectCurrency : ((CurrencyDef) -> Void)?
     var didTapSecurity: (() -> Void)?
     var didTapSupport: (() -> Void)?
+    var didTapWebsite: (() -> Void)?
     var didTapSettings: (() -> Void)?
     var didTapAddWallet: (() -> Void)?
 
@@ -45,6 +46,7 @@ class HomeScreenViewController : UIViewController, Subscriber, Trackable {
         assetList.didTapSupport = didTapSupport
         assetList.didTapSettings = didTapSettings
         assetList.didTapAddWallet = didTapAddWallet
+        assetList.didTapWebsite = didTapWebsite
         addSubviews()
         addConstraints()
         setInitialData()
@@ -88,7 +90,7 @@ class HomeScreenViewController : UIViewController, Subscriber, Trackable {
             logo.leadingAnchor.constraint(equalTo: subHeaderView.leadingAnchor, constant: C.padding[3]),
             logo.bottomAnchor.constraint(equalTo: subHeaderView.bottomAnchor, constant: -C.padding[0]),
             logo.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
-            logo.heightAnchor.constraint(equalTo: logo.widthAnchor, multiplier: 200.0/772.0)])
+            logo.heightAnchor.constraint(equalTo: logo.widthAnchor, multiplier: 160.0/772.0)])
         
         total.constrain([
             total.trailingAnchor.constraint(equalTo: subHeaderView.trailingAnchor, constant: -C.padding[2]),

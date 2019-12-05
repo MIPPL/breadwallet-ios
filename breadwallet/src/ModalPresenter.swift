@@ -257,9 +257,19 @@ class ModalPresenter : Subscriber, Trackable {
         } else {
             aId = "categories/360002247832-Mobile-Application";
         }
-        url = "https://bitradio.zendesk.com/hc/en-us/\(aId)"
-
+        //url = "https://bitradio.zendesk.com/hc/en-us/\(aId)"
+        url = "https://bitrad.io/contact/"
         supportCenter.navigate(to: url)        // bypass support
+        //topViewController?.present(supportCenter, animated: true, completion: {})
+    }
+
+    func presentWebsite() {
+        supportCenter.modalPresentationStyle = .overFullScreen
+       supportCenter.modalPresentationCapturesStatusBarAppearance = true
+       supportCenter.transitioningDelegate = supportCenter
+       var url: String
+        url = "https://bitrad.io/"
+        supportCenter.navigate(to: url)        // bypass
         //topViewController?.present(supportCenter, animated: true, completion: {})
     }
 
@@ -676,6 +686,21 @@ class ModalPresenter : Subscriber, Trackable {
         nc.viewControllers = [start]
         topViewController?.present(nc, animated: true, completion: nil)
     }
+    
+    // BRD modern version
+    /*private func presentKeyImport(wallet: Wallet, scanResult: QRCode? = nil) {
+        let nc = ModalNavigationController()
+        nc.setClearNavbar()
+        nc.setWhiteStyle()
+        let start = ImportKeyViewController(wallet: wallet, initialQRCode: scanResult)
+        start.addCloseNavigationItem(tintColor: .white)
+        start.navigationItem.title = S.Import.title
+        let faqButton = UIButton.buildFaqButton(articleId: ArticleIds.importWallet, currency: wallet.currency)
+        faqButton.tintColor = .white
+        start.navigationItem.rightBarButtonItems = [UIBarButtonItem.negativePadding, UIBarButtonItem(customView: faqButton)]
+        nc.viewControllers = [start]
+        topViewController?.present(nc, animated: true, completion: nil)
+    }*/
 
     //MARK: - Prompts
     func presentBiometricsSetting() {

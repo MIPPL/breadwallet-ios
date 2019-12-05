@@ -29,4 +29,30 @@ struct SimpleUTXO {
         self.script = [UInt8](scriptData)
         self.satoshis = satoshis
     }
+    
+    init?( hash: UInt256, index: UInt32, script: [UInt8], satoshis: UInt64) {
+        self.hash = hash
+        self.index = index
+        self.script = script
+        self.satoshis = satoshis
+    }
+}
+
+struct ChainzUtxoItem : Codable {
+     let tx_hash : String!
+     let tx_ouput_n : UInt32!
+     let value : UInt64!
+     let confirmations : UInt32!
+     let script :String!
+     let addr : String!
+    
+    func ToSimpleUTXO() -> SimpleUTXO?   {
+        let ret = SimpleUTXO(hash: (self.tx_hash.hexToData?.reverse.uInt256)!, index: self.tx_ouput_n, script: [UInt8](self.script.hexToData!), satoshis: self.value ) 
+        
+        return ret
+    }
+}
+
+struct ChainzObject : Codable {
+    var unspent_outputs : [ChainzUtxoItem]!
 }

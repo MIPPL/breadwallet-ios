@@ -401,6 +401,7 @@ enum S {
         static let security = NSLocalizedString("MenuButton.security", value:"Security Center", comment: "Menu button title")
         static let support = NSLocalizedString("MenuButton.support", value:"Support", comment: "Menu button title")
         static let settings = NSLocalizedString("MenuButton.settings", value:"Settings", comment: "Menu button title")
+        static let website = NSLocalizedString("MenuButton.website", value:"Website", comment: "Menu button title")
         static let lock = NSLocalizedString("MenuButton.lock", value:"Lock Wallet", comment: "Menu button title")
         static let buy = NSLocalizedString("MenuButton.buy", value:"Buy Bitradio", comment: "Buy bitradio title")
         static let addWallet = NSLocalizedString("MenuButton.addWallet", value: "Add Wallet", comment: "Add Wallet button title")

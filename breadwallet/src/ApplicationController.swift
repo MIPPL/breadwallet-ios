@@ -364,6 +364,10 @@ class ApplicationController : Subscriber, Trackable {
             self.modalPresenter?.presentFaq()
         }
         
+        home.didTapWebsite = {
+            self.modalPresenter?.presentWebsite()
+        }
+        
         home.didTapSecurity = {
             self.modalPresenter?.presentSecurityCenter()
         }

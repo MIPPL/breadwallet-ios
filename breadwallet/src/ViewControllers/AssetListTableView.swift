@@ -15,6 +15,7 @@ class AssetListTableView: UITableViewController, Subscriber {
     var didTapSupport: (() -> Void)?
     var didTapSettings: (() -> Void)?
     var didTapAddWallet: (() -> Void)?
+    var didTapWebsite: (() -> Void)?
     private let assetHeight: CGFloat = 85.0
     private let menuHeight: CGFloat = 53.0
     private let manageWalletContent = (S.TokenList.manageTitle, #imageLiteral(resourceName: "PlaylistPlus"))
@@ -84,6 +85,7 @@ class AssetListTableView: UITableViewController, Subscriber {
         case settings
         case security
         case support
+        case website
         
         var content: (String, UIImage) {
             switch self {
@@ -93,10 +95,12 @@ class AssetListTableView: UITableViewController, Subscriber {
                 return (S.MenuButton.security, #imageLiteral(resourceName: "Shield"))
             case .support:
                 return (S.MenuButton.support, #imageLiteral(resourceName: "Faq"))
+            case .website:
+                return (S.MenuButton.website, #imageLiteral(resourceName: "Faq"))
             }
         }
         
-        static let allItems: [Menu] = [.settings, .security, .support]
+        static let allItems: [Menu] = [.settings, .security, .support, .website]
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -189,6 +193,8 @@ class AssetListTableView: UITableViewController, Subscriber {
                 didTapSecurity?()
             case .support:
                 didTapSupport?()
+            case .website:
+                didTapWebsite?()
             }
         }
     }
