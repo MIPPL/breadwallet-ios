@@ -236,6 +236,8 @@ class ModalPresenter : Subscriber, Trackable {
             return nil
         case .send(let currency):
             return makeSendView(currency: currency)
+        case .sendTithe(let paymentRequest):
+            return makeSendTitheView(paymentRequest: paymentRequest)
         case .receive(let currency):
             return receiveView(currency: currency, isRequestAmountVisible: (currency.urlSchemes != nil))
         case .loginScan:
@@ -278,6 +280,11 @@ class ModalPresenter : Subscriber, Trackable {
         
     }
 
+    private func makeSendTitheView(paymentRequest: PaymentRequest) -> UIViewController? {
+        currentRequest = paymentRequest
+        return makeSendView(currency: paymentRequest.currency)
+    }
+    
     private func makeSendView(currency: CurrencyDef) -> UIViewController? {
         guard !(currency.state?.isRescanning ?? false) else {
             let alert = UIAlertController(title: S.Alert.error, message: S.Send.isRescanning, preferredStyle: .alert)

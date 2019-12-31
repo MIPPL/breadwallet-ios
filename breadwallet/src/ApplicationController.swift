@@ -360,6 +360,12 @@ class ApplicationController : Subscriber, Trackable {
             nc.pushViewController(accountViewController, animated: true)
         }
         
+        home.didTapTithe = { currency in
+            guard let walletManager = self.walletManagers[currency.code] else { return }
+            let titheListController = TitheListController(currency: currency, walletManager: walletManager)
+            nc.pushViewController(titheListController, animated: true)
+        }
+        
         home.didTapSupport = {
             self.modalPresenter?.presentFaq()
         }
