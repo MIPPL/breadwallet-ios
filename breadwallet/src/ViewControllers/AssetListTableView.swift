@@ -11,11 +11,13 @@ import UIKit
 class AssetListTableView: UITableViewController, Subscriber {
 
     var didSelectCurrency: ((CurrencyDef) -> Void)?
+    var didTapTithe: ((CurrencyDef) -> Void)?
     var didTapSecurity: (() -> Void)?
     var didTapSupport: (() -> Void)?
     var didTapSettings: (() -> Void)?
     var didTapAddWallet: (() -> Void)?
     private let assetHeight: CGFloat = 85.0
+    private let titheHeight: CGFloat = 65.0
     private let menuHeight: CGFloat = 53.0
     private let manageWalletContent = (S.TokenList.manageTitle, #imageLiteral(resourceName: "PlaylistPlus"))
 
@@ -28,6 +30,7 @@ class AssetListTableView: UITableViewController, Subscriber {
     override func viewDidLoad() {
         tableView.backgroundColor = .whiteBackground
         tableView.register(HomeScreenCell.self, forCellReuseIdentifier: HomeScreenCell.cellIdentifier)
+        tableView.register(HomeTitheCell.self, forCellReuseIdentifier: HomeTitheCell.cellIdentifier)
         tableView.register(MenuCell.self, forCellReuseIdentifier: MenuCell.cellIdentifier)
         tableView.separatorStyle = .none
         
@@ -77,6 +80,7 @@ class AssetListTableView: UITableViewController, Subscriber {
     
     enum Section: Int {
         case assets
+        case tithe
         case menu
     }
 
@@ -100,7 +104,7 @@ class AssetListTableView: UITableViewController, Subscriber {
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -109,6 +113,8 @@ class AssetListTableView: UITableViewController, Subscriber {
         switch section {
         case .assets:
             return Store.state.displayCurrencies.count   // remove +1 to hide "Manage wallets" menu
+        case .tithe:
+            return 1
         case .menu:
             return Menu.allItems.count
         }
@@ -119,6 +125,8 @@ class AssetListTableView: UITableViewController, Subscriber {
         switch section {
         case .assets:
             return isAddWalletRow(row: indexPath.row) ? menuHeight : assetHeight
+        case .tithe:
+            return titheHeight
         case .menu:
             return menuHeight
         }
@@ -142,6 +150,13 @@ class AssetListTableView: UITableViewController, Subscriber {
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeScreenCell.cellIdentifier, for: indexPath) as! HomeScreenCell
             cell.set(viewModel: viewModel)
             return cell
+            
+        case .tithe:
+            let viewModel = HomeTitheViewModel(currency: Currencies.btc, title: "Tithe")
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeTitheCell.cellIdentifier, for: indexPath) as! HomeTitheCell
+            cell.set(viewModel: viewModel)
+            return cell
+
         case .menu:
             let cell = tableView.dequeueReusableCell(withIdentifier: MenuCell.cellIdentifier, for: indexPath) as! MenuCell
             guard let item = Menu(rawValue: indexPath.row) else { return cell }
@@ -157,6 +172,8 @@ class AssetListTableView: UITableViewController, Subscriber {
         switch section {
         case .assets:
             return S.HomeScreen.portfolio
+        case .tithe:
+            return "Tithe"
         case .menu:
             return S.HomeScreen.admin
         }
@@ -179,6 +196,8 @@ class AssetListTableView: UITableViewController, Subscriber {
         switch section {
         case .assets:
             isAddWalletRow(row: indexPath.row) ? didTapAddWallet?() : didSelectCurrency?(Store.state.displayCurrencies[indexPath.row])
+        case .tithe:
+            didTapTithe?(Currencies.btc)
         case .menu:
             guard let item = Menu(rawValue: indexPath.row) else { return }
             switch item {
