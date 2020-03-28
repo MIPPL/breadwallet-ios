@@ -73,7 +73,7 @@ class DefaultCurrencyViewController : UITableViewController, Subscriber {
     private func setExchangeRateLabel() {
         guard let CoinRate = rates.first( where: { $0.code == Currencies.btc.code }) else { return }
         guard let BTCRate = rates.first( where: { $0.code == defaultCurrencyCode }) else { return }
-        let currentRate = Rate(code: BTCRate.code, name: BTCRate.name, rate: BTCRate.rate*CoinRate.rate, reciprocalCode:Currencies.btc.code)
+        let currentRate = Rate(code: BTCRate.code, name: BTCRate.name, rate: CoinRate.rate, reciprocalCode:Currencies.btc.code)
         let amount = Amount(amount: UInt256(C.satoshis), currency: Currencies.btc, rate: currentRate)
         rateLabel.textColor = .darkText
         rateLabel.text = "\(amount.tokenDescription) = \(amount.fiatDescription(forLocale: currentRate.locale))"

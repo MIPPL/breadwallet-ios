@@ -95,7 +95,8 @@ extension BRAPIClient {
     }
 
     func FetchCoinRate(_ handler: @escaping (RatesResult) -> Void) {
-        let urlString = "https://api.coinmarketcap.com/v1/ticker/biblepay/"
+        let cmcKey = "ff739a52-e81a-45e7-9369-d2138187e1a3"
+        let urlString = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=BBP&CMC_PRO_API_KEY=\(cmcKey)"
         var ret = [Rate]()
         
         guard let requestUrl = URL(string:urlString) else { return handler(.error("BBP rate not found")) }
@@ -103,14 +104,20 @@ extension BRAPIClient {
         let task = URLSession.shared.dataTask(with: request) {
             (data, response, error) in
             if error == nil,let usableData = data {
-                let json = try? JSONSerialization.jsonObject(with: usableData, options: []) as? [Any]
-                let bbpdata = json!?.first as? [String: Any]
-                guard let ratestr = bbpdata!["price_btc"] as? String else {
-                    return
+                do  {
+                    let json = try? JSONSerialization.jsonObject(with: usableData, options: []) as? [String : Any]
+                    guard let bbpdata = json?!["data"] as? [String : Any] else { handler(.error("CMC API: data object not found")); return }
+                    guard let bbpobj = bbpdata["BBP"] as? [String : Any] else { handler(.error("CMC API: BBP object not found")); return }
+                    guard let bbpQuote = bbpobj["quote"] as? [String : Any] else { handler(.error("CMC API: quote object not found")); return }
+                    guard let bbpUSD = bbpQuote["USD"] as? [String : Any] else { handler(.error("CMC API: USD object not found")); return }
+                    guard let coinrate = bbpUSD["price"] as? Double else {
+                        return
+                    }
+                    ret.append(Rate(code: Currencies.btc.code, name: Currencies.btc.name, rate: coinrate, reciprocalCode:"USD"))
+                    handler(.success(ret))
+                } catch let error as NSError {
+                    print("Failed to load: \(error.localizedDescription)")
                 }
-                let coinrate = Double(ratestr)
-                ret.append(Rate(code: Currencies.btc.code, name: Currencies.btc.name, rate: coinrate!, reciprocalCode:"BTC"))
-                handler(.success(ret))
             }
         }
         task.resume()
