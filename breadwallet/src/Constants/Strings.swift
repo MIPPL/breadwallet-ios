@@ -452,6 +452,33 @@ enum S {
         static let lock = NSLocalizedString("MenuButton.lock", value:"Lock Wallet", comment: "Menu button title")
         static let buy = NSLocalizedString("MenuButton.buy", value:"Buy Wagerr", comment: "Buy wagerr title")
         static let addWallet = NSLocalizedString("MenuButton.addWallet", value: "Add Wallet", comment: "Add Wallet button title")
+        static let Dice = NSLocalizedString("MenuButton.Dice", value:"Dice", comment: "Dice (quick games)")
+    }
+    
+    enum Dice {
+        static let Equal = NSLocalizedString("Dice.Equal", value:"Equal", comment: "Equal")
+        static let NotEqual = NSLocalizedString("Dice.NotEqual", value:"Not Equal", comment: "Not Equal")
+        static let TotalOver = NSLocalizedString("Dice.TotalOver", value:"Total Over", comment: "Total Over")
+        static let TotalUnder = NSLocalizedString("Dice.TotalUnder", value:"Total Under", comment: "Total Under")
+        static let Over = NSLocalizedString("Dice.Over", value: "Over", comment: "Over")
+        static let Under = NSLocalizedString("Dice.Under", value:"Under", comment: "Under")
+        static let Even = NSLocalizedString("Dice.Even", value:"Even", comment: "Even")
+        static let Odds = NSLocalizedString("Dice.Odds", value:"Odds", comment: "Odds")
+        static let Bet = NSLocalizedString("Dice.Bet", value:"Bet", comment: "Bet")
+        static let Dice = NSLocalizedString("Dice.Dice", value:"Dice", comment: "Dice")
+        static let SelectedOutcome = NSLocalizedString("Dice.SelectedOutcome", value:"Selected outcome", comment: "Selected outcome")
+        static let Result = NSLocalizedString("Dice.Result", value: "Result", comment: "Result")
+        static let EqualTo = NSLocalizedString("Dice.EqualTo", value:"Equal To", comment: "Equal To")
+        static let NotEqualTo = NSLocalizedString("Dice.NotEqualTo", value:"Not Equal To", comment: "Not Equal To")
+        static let RollOver = NSLocalizedString("Dice.RollOver", value:"Roll Over", comment: "Roll Over")
+        static let RollUnder = NSLocalizedString("Dice.RollUnder", value:"Roll Under", comment: "Roll Under")
+        static let RollEven = NSLocalizedString("Dice.RollEven", value:"Roll Even", comment: "Roll Even")
+        static let RollOdds = NSLocalizedString("Dice.RollOdds", value:"Roll Odds", comment: "Roll Odds")
+        static let PotentialReward = NSLocalizedString("Dice.PotentialReward", value: "Potential Reward", comment: "Potential Reward")
+        
+        static let EqualNotEqual = NSLocalizedString("Dice.EqualNotEqual", value:"Equal/Not Equal", comment: "Roll Even")
+        static let OverUnder = NSLocalizedString("Dice.OverUnder", value:"Over/Under", comment: "Over/Under")
+        static let EvenOdds = NSLocalizedString("Dice.EvenOdds", value: "Even/Odds", comment: "Even/Odds")
     }
     
     enum HomeScreen {

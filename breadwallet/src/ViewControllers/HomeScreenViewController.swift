@@ -28,6 +28,7 @@ class HomeScreenViewController : UIViewController, Subscriber, Trackable {
 
     var didSelectCurrency : ((CurrencyDef) -> Void)?
     var didTapBet: ((CurrencyDef) -> Void)?
+    var didTapDice: ((CurrencyDef) -> Void)?
     var didTapBuy: ((CurrencyDef) -> Void)?
     var didTapSecurity: (() -> Void)?
     var didTapSupport: (() -> Void)?
@@ -44,6 +45,7 @@ class HomeScreenViewController : UIViewController, Subscriber, Trackable {
     override func viewDidLoad() {
         assetList.didSelectCurrency = didSelectCurrency
         assetList.didTapBet = didTapBet
+        assetList.didTapDice = didTapDice
         assetList.didTapBuy = didTapBuy
         assetList.didTapSecurity = didTapSecurity
         assetList.didTapSupport = didTapSupport
