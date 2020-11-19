@@ -484,6 +484,10 @@ class BRWallet {
         return BRWalletCreateParlayBetTransaction(cPtr, forAmount, type, nLegs, eventID1, outcome1, eventID2, outcome2, eventID3, outcome3, eventID4, outcome4, eventID5, outcome5)
     }
     
+    func createParlayBetTransaction(forAmount: UInt64, type: Int32, diceGameType: Int32, selectedOutcome : Int32  ) -> BRTxRef? {
+        return BRWalletCreateDiceBetTransaction(cPtr, forAmount, type, diceGameType, selectedOutcome)
+    }
+    
     // returns an unsigned transaction that satisifes the given transaction outputs
     func createTxForOutputs(_ outputs: [BRTxOutput]) -> BRTxRef? {
         return BRWalletCreateTxForOutputs(cPtr, outputs, outputs.count)
