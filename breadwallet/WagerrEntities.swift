@@ -428,6 +428,7 @@ enum BetType : Int32 {
     case PEERLESS = 0x03
     case CHAINLOTTO = 0x07
     case PARLAY = 0x0C
+    case QUICK_GAMES = 0x0D
     case UNKNOWN = -1
 }
 
@@ -664,3 +665,52 @@ func ==(lhs: ParlayLegEntity, rhs: ParlayLegEntity) -> Bool {
         lhs.outcome == rhs.outcome
 }
 
+// Quick games entities and enums
+enum BetQuickGameType : Int32 {
+    case DICE = 0x00
+    case UNKNOWN = -1
+}
+
+class BetQuickGamesEntity : BetCore   {
+    var type : BetType
+    var quickGameType : BetQuickGameType
+    var amount : UInt64
+
+    init(blockheight: UInt64, timestamp: TimeInterval, txHash: String, version: UInt32, amount: UInt64, quickGameType: BetQuickGameType) {
+        self.type = BetType.QUICK_GAMES
+        self.amount = amount
+        self.quickGameType = quickGameType
+        super.init(blockheight: blockheight, timestamp: timestamp, txHash: txHash, version: version)
+    }
+}
+
+enum BetDiceGameType : Int32 {
+    case EQUAL = 0x00
+    case NOT_EQUAL = 0x01
+    case TOTAL_OVER = 0x02
+    case TOTAL_UNDER = 0x03
+    case EVEN = 0x04
+    case ODDS = 0x05
+    case UNKNOWN = -1
+}
+
+class BetDiceGamesEntity : BetQuickGamesEntity   {
+    var diceGameType : BetDiceGameType
+    var selectedOutcome : Int32
+    
+    // result data
+    var dice1 : Int32
+    var dice2 : Int32
+    var payoutTxHash : String
+    var payoutAmount : UInt64
+    
+    init(blockheight: UInt64, timestamp: TimeInterval, txHash: String, version: UInt32, amount: UInt64, diceGameType : BetDiceGameType, selectedOutcome : Int32) {
+        self.diceGameType = diceGameType
+        self.selectedOutcome = selectedOutcome
+        self.dice1 = 0
+        self.dice2 = 0
+        self.payoutAmount = 0
+        self.payoutTxHash = ""
+        super.init(blockheight: blockheight, timestamp: timestamp, txHash: txHash, version: version, amount: amount, quickGameType: BetQuickGameType.DICE)
+    }
+}

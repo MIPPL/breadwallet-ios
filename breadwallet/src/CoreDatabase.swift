@@ -44,6 +44,7 @@ class CoreDatabase {
     private var mappingEnt: Int32 = 0
     private var eventEnt: Int32 = 0
     private var resultEnt: Int32 = 0
+    private var dicegameEnt: Int32 = 0
     private let queue = DispatchQueue(label: "com.wagerrwallet.corecbqueue")
 
     init(dbPath: String = "BreadWallet.sqlite") {
@@ -152,7 +153,7 @@ class CoreDatabase {
             WGR_MAPPING
             WGR_EVENT
             WGR_RESULT
-         
+            WGR_DICEGAME
          */
         // WGR_MAPPING
         sqlite3_exec(db, "create table if not exists WGR_MAPPING (" +
@@ -227,6 +228,27 @@ class CoreDatabase {
             "on WGR_RESULT (ZEVENT_ID)", nil, nil, nil)
         if sqlite3_errcode(db) != SQLITE_OK { print(String(cString: sqlite3_errmsg(db))) }
         
+        // WGR_DICEGAME
+        sqlite3_exec(db, "create table if not exists WGR_DICEGAME (" +
+            "Z_PK integer primary key," +
+            "ZTYPE integer," +
+            "ZVERSION integer," +
+            "ZTIMESTAMP integer," +
+            "ZHEIGHT integer," +
+            "ZTXHASH varchar," +
+            "ZQUICKGAMETYPE integer," +
+            "ZDICEGAMETYPE integer," +
+            "ZAMOUNT integer," +
+            "ZSELECTEDOUTCOME integer," +
+            "ZDICE1 integer DEFAULT 0," +
+            "ZDICE2 integer DEFAULT 0," +
+            "ZPAYOUTAMOUNT integer DEFAULT 0," +
+            "ZPAYOUTTXHASH varchar DEFAULT '')"
+            , nil, nil, nil)
+        sqlite3_exec(db, "create index if not exists WGR_DICEGAME_ZTXHASH_INDEX " +
+            "on WGR_DICEGAME (ZTXHASH)", nil, nil, nil)
+        if sqlite3_errcode(db) != SQLITE_OK { print(String(cString: sqlite3_errmsg(db))) }
+        
         // End WAGERR tables
         
         // primary keys
@@ -255,6 +277,9 @@ class CoreDatabase {
         sqlite3_exec(db, "insert into Z_PRIMARYKEY (Z_ENT, Z_NAME, Z_SUPER, Z_MAX) " +
             "select 12, 'WGR_Result', 0, 0 except " +
             "select 12, Z_NAME, 0, 0 from Z_PRIMARYKEY where Z_NAME = 'WGR_Result'", nil, nil, nil)
+        sqlite3_exec(db, "insert into Z_PRIMARYKEY (Z_ENT, Z_NAME, Z_SUPER, Z_MAX) " +
+            "select 13, 'WGR_DiceGame', 0, 0 except " +
+            "select 13, Z_NAME, 0, 0 from Z_PRIMARYKEY where Z_NAME = 'WGR_DiceGame'", nil, nil, nil)
         // End WAGERR PKs
 
         if sqlite3_errcode(db) != SQLITE_OK { print(String(cString: sqlite3_errmsg(db))) }
@@ -271,6 +296,7 @@ class CoreDatabase {
             else if name == "WGR_Mapping" { mappingEnt = sqlite3_column_int(sql, 0) }
             else if name == "WGR_Event" { eventEnt = sqlite3_column_int(sql, 0) }
             else if name == "WGR_Result" { resultEnt = sqlite3_column_int(sql, 0) }
+            else if name == "WGR_DiceGame" { dicegameEnt = sqlite3_column_int(sql, 0) }
         }
 
         if sqlite3_errcode(db) != SQLITE_DONE { print(String(cString: sqlite3_errmsg(db))) }
@@ -1003,6 +1029,65 @@ class CoreDatabase {
         }
     }
 
+    // dice games insert and update
+    func saveBetDiceGame(_ ent: BetDiceGamesEntity) {
+        queue.async {
+            var sql0: OpaquePointer? = nil
+            sqlite3_prepare_v2(self.db, "select ZTXHASH from WGR_DICEGAME where ZTXHASH = '\(ent.txHash)'", -1, &sql0, nil)
+            defer { sqlite3_finalize(sql0) }
+
+            if sqlite3_step(sql0) == SQLITE_ROW {   // result exists... abandon
+                return
+            }
+            
+            var sql: OpaquePointer? = nil
+            sqlite3_prepare_v2(self.db, "select Z_MAX from Z_PRIMARYKEY where Z_ENT = \(self.dicegameEnt)", -1, &sql, nil)
+            defer { sqlite3_finalize(sql) }
+
+            guard sqlite3_step(sql) == SQLITE_ROW else {
+                print(String(cString: sqlite3_errmsg(self.db)))
+                sqlite3_exec(self.db, "rollback", nil, nil, nil)
+                return
+            }
+
+            let pk = sqlite3_column_int(sql, 0)
+            var sql2: OpaquePointer? = nil
+            sqlite3_prepare_v2(self.db, "insert or rollback into WGR_DICEGAME " +
+                "(Z_PK, ZTYPE, ZVERSION, ZTIMESTAMP, ZHEIGHT, ZTXHASH, ZQUICKGAMETYPE, ZDICEGAMETYPE, ZAMOUNT, ZSELECTEDOUTCOME ) " +
+                "values (\(pk + 1), \(ent.type.rawValue), \(ent.version),  \(ent.timestamp), \(ent.blockheight), '\(ent.txHash)', \(ent.quickGameType.rawValue), \(ent.diceGameType.rawValue), \(ent.amount), \(ent.selectedOutcome) ", -1, &sql2, nil)
+            defer { sqlite3_finalize(sql2) }
+            
+            guard sqlite3_step(sql2) == SQLITE_DONE else {
+                print("SQLITE error saveResult: " + String(cString: sqlite3_errmsg(self.db)))
+                return
+            }
+
+            sqlite3_exec(self.db, "update or rollback Z_PRIMARYKEY set Z_MAX = \(pk + 1) " +
+                "where Z_ENT = \(self.dicegameEnt) and Z_MAX = \(pk)", nil, nil, nil)
+
+            guard sqlite3_errcode(self.db) == SQLITE_OK else {
+                print(String(cString: sqlite3_errmsg(self.db)))
+                return
+            }
+
+            sqlite3_exec(self.db, "commit", nil, nil, nil)
+            self.setDBFileAttributes()
+        }
+    }
+    
+    func updateBetDiceGame(_ ent: BetDiceGamesEntity) {
+        queue.async {
+            sqlite3_exec(self.db, "update or rollback WGR_DICEGAME set ZDICE1 = \(ent.dice1), ZDICE2 = \(ent.dice2), ZPAYOUTAMOUNT = \(ent.payoutAmount), ZPAYOUTTXHASH = '\(ent.payoutTxHash)' where ZTXHASH = '\(ent.txHash)'", nil, nil, nil)
+            
+            guard sqlite3_errcode(self.db) == SQLITE_OK else {
+                print("SQLITE error updateBetDiceGame: " + String(cString: sqlite3_errmsg(self.db)))
+                return
+            }
+
+            sqlite3_exec(self.db, "commit", nil, nil, nil)
+            self.setDBFileAttributes()
+        }
+    }
     // undo double utf8 encoding
     func utf8Decode2(_ str : String ) -> String {
         var bytesIterator = str.utf8.makeIterator()
