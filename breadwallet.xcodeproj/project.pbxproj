@@ -22,6 +22,9 @@
 		062D29AE23A62EBC009ADC9E /* EventBetOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062D29AD23A62EBC009ADC9E /* EventBetOptionCell.swift */; };
 		062D29B023A65DDD009ADC9E /* EventSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062D29AF23A65DDD009ADC9E /* EventSliderCell.swift */; };
 		062E51262566E68B00B0DA16 /* HomeBetDiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062E51252566E68B00B0DA16 /* HomeBetDiceCell.swift */; };
+		062E5129256820C300B0DA16 /* DiceListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062E5128256820C300B0DA16 /* DiceListCell.swift */; };
+		062E512B25682CB900B0DA16 /* DiceHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062E512A25682CB900B0DA16 /* DiceHeaderView.swift */; };
+		062E512D25682CD000B0DA16 /* DiceSearchHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062E512C25682CD000B0DA16 /* DiceSearchHeader.swift */; };
 		0635AF9C240F98AB009C12F5 /* TOSCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0635AF9B240F98AB009C12F5 /* TOSCell.swift */; };
 		0635AFA0242DE71A009C12F5 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0635AF9F242DE71A009C12F5 /* WebViewController.swift */; };
 		0635AFA2243A3EBD009C12F5 /* ParlaySliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0635AFA1243A3EBD009C12F5 /* ParlaySliderCell.swift */; };
@@ -715,6 +718,9 @@
 		062D29AD23A62EBC009ADC9E /* EventBetOptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBetOptionCell.swift; sourceTree = "<group>"; };
 		062D29AF23A65DDD009ADC9E /* EventSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventSliderCell.swift; sourceTree = "<group>"; };
 		062E51252566E68B00B0DA16 /* HomeBetDiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeBetDiceCell.swift; sourceTree = "<group>"; };
+		062E5128256820C300B0DA16 /* DiceListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiceListCell.swift; path = breadwallet/Dice/DiceListCell.swift; sourceTree = SOURCE_ROOT; };
+		062E512A25682CB900B0DA16 /* DiceHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiceHeaderView.swift; sourceTree = "<group>"; };
+		062E512C25682CD000B0DA16 /* DiceSearchHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiceSearchHeader.swift; sourceTree = "<group>"; };
 		0635AF9B240F98AB009C12F5 /* TOSCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TOSCell.swift; sourceTree = "<group>"; };
 		0635AF9F242DE71A009C12F5 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		0635AFA1243A3EBD009C12F5 /* ParlaySliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParlaySliderCell.swift; sourceTree = "<group>"; };
@@ -2015,6 +2021,14 @@
 				0635AFA7243F1FB6009C12F5 /* ParlayLegCell.swift */,
 			);
 			path = EventCells;
+			sourceTree = "<group>";
+		};
+		062E51272568201300B0DA16 /* Dice */ = {
+			isa = PBXGroup;
+			children = (
+				062E5128256820C300B0DA16 /* DiceListCell.swift */,
+			);
+			path = Dice;
 			sourceTree = "<group>";
 		};
 		06A3D903239DB56700518AD8 /* Events */ = {
@@ -3467,6 +3481,9 @@
 				CEAA9E9A1DC2B9320066731D /* ConfirmPhrase.swift */,
 				CEC6AA471DEFCFCD00EE5AFD /* Controls */,
 				CE6BCF5C1EE9E89A0029849C /* CustomTitleView.swift */,
+				062E51272568201300B0DA16 /* Dice */,
+				062E512A25682CB900B0DA16 /* DiceHeaderView.swift */,
+				062E512C25682CD000B0DA16 /* DiceSearchHeader.swift */,
 				CE4C1CC51ED65D830063E184 /* DrawableCircle.swift */,
 				CE6DCC261E6108D50044257B /* EnterPhraseCell.swift */,
 				06086224238AAB4E002F4E9B /* EventCells */,
@@ -4512,6 +4529,7 @@
 				06A3D905239DB5CC00518AD8 /* EventsPickerView.swift in Sources */,
 				CEC6AA4D1DF0741100EE5AFD /* ModalDisplayable.swift in Sources */,
 				CED811E11EB302DA003A8D1E /* WatchData.swift in Sources */,
+				062E512B25682CB900B0DA16 /* DiceHeaderView.swift in Sources */,
 				CEE0EF521EBD14B60018DB36 /* PinTransitioningDelegate.swift in Sources */,
 				CE45C1FD1E7650F5002C3847 /* KVStoreCoordinator.swift in Sources */,
 				754AE0BC1DFE8A46007FD001 /* BRCore.swift in Sources */,
@@ -4629,6 +4647,7 @@
 				CE30F0E61EB27844004B8EE5 /* PhoneWCSessionManager.swift in Sources */,
 				7503773D1DF57428005EB8AE /* WalletManager+Auth.swift in Sources */,
 				22A9A9581DF61945000F0016 /* BRWebViewController.swift in Sources */,
+				062E512D25682CD000B0DA16 /* DiceSearchHeader.swift in Sources */,
 				CEC4CF091F0C84AB00E5C82E /* UIViewController+Alerts.swift in Sources */,
 				0635AFA8243F1FB6009C12F5 /* ParlayLegCell.swift in Sources */,
 				0682C7922494CB5E00E433FA /* WagerrExplorerEntities.swift in Sources */,
@@ -4649,6 +4668,7 @@
 				CEF3D2DB1E8B55C80070178E /* UISlider+Gradient.swift in Sources */,
 				CE65C66A207D41BB000C99C4 /* CurrencyListMetaData.swift in Sources */,
 				06673E8E2377EA8500549005 /* WagerrOpCodeManager.swift in Sources */,
+				062E5129256820C300B0DA16 /* DiceListCell.swift in Sources */,
 				CE4CA7BC1EE3649100373F11 /* BRActivityView.swift in Sources */,
 				7CBABD9C20181D890077CB55 /* NSMutableAttributedString+Additions.swift in Sources */,
 				CEC6AA421DEFC88F00EE5AFD /* ReceiveViewController.swift in Sources */,

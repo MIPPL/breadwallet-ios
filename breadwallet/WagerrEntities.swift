@@ -34,6 +34,11 @@ class BetCore   {
         // not implemented in base class
         assert(false)
     }
+    
+    var shortBetTimestamp: String {
+        let date = Date(timeIntervalSinceReferenceDate: timestamp)
+        return DateFormatter.shortDateFormatter.string(from: date)
+    }
 }
 
 class BetMapping : BetCore   {
@@ -692,6 +697,25 @@ enum BetDiceGameType : Int32 {
     case EVEN = 0x04
     case ODDS = 0x05
     case UNKNOWN = -1
+    
+    var description: String   {
+        switch self     {
+        case .EQUAL:
+            return S.Dice.Equal
+        case .NOT_EQUAL:
+            return S.Dice.NotEqual
+        case .TOTAL_OVER:
+            return S.Dice.TotalOver
+        case .TOTAL_UNDER:
+            return S.Dice.TotalUnder
+        case .EVEN:
+            return S.Dice.Even
+        case .ODDS:
+            return S.Dice.Odds
+        case .UNKNOWN:
+            return "Unknown"
+        }
+    }
 }
 
 class BetDiceGamesEntity : BetQuickGamesEntity   {
@@ -712,5 +736,24 @@ class BetDiceGamesEntity : BetQuickGamesEntity   {
         self.payoutAmount = 0
         self.payoutTxHash = ""
         super.init(blockheight: blockheight, timestamp: timestamp, txHash: txHash, version: version, amount: amount, quickGameType: BetQuickGameType.DICE)
+    }
+    
+    func getAttrPayoutAmount() -> NSAttributedString  {
+        let tsAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.receivedGreen]
+        let ret = NSMutableAttributedString(string: String.init(format: "%.2f WGR", payoutAmount/C.satoshis), attributes: tsAttrs)
+        return ret
+    }
+    
+    var selectedOutcomeText : String    {
+        var ret = ""
+        switch diceGameType {
+        case .EQUAL, .NOT_EQUAL:
+            ret = String.init(format: "%d", selectedOutcome)
+        case .TOTAL_OVER, .TOTAL_UNDER:
+            ret = String.init(format: "%d.5", selectedOutcome)
+        default:
+            ret = ""
+        }
+        return ret
     }
 }
