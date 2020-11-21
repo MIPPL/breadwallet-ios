@@ -231,7 +231,7 @@ class AssetListTableView: UITableViewController, Subscriber {
         case .assets:
             isAddWalletRow(row: indexPath.row) ? didTapAddWallet?() : didSelectCurrency?(Store.state.displayCurrencies[indexPath.row])
         case .events:
-            if indexPath.row == Store.state.displayCurrencies.count + 1 {
+            if indexPath.row == 0 {
                 didTapBet?( Currencies.btc )
             }
             else    {

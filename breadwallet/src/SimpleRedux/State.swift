@@ -134,6 +134,7 @@ struct WalletState {
     let transactions: [Transaction]
     let events: [BetEventViewModel]
     let swapTransactions: [SwapViewModel]
+    let diceTransactions: [BetDiceGamesEntity]
     let parlayBetData : ParlayBetEntity?
     let lastBlockTimestamp: UInt32
     let name: String
@@ -157,6 +158,7 @@ struct WalletState {
                            transactions: [],
                            events: [],
                            swapTransactions: [],
+                           diceTransactions: [],
                            parlayBetData: nil,
                            lastBlockTimestamp: 0,
                            name: S.AccountHeader.defaultWalletName,
@@ -178,6 +180,7 @@ struct WalletState {
                     transactions: [Transaction]? = nil,
                     events: [BetEventViewModel]? = nil,
                     swapTransactions: [SwapViewModel]? = nil,
+                    diceTransactions: [BetDiceGamesEntity]? = nil,
                     parlayBetData : ParlayBetEntity? = nil,
                     lastBlockTimestamp: UInt32? = nil,
                     name: String? = nil,
@@ -199,6 +202,7 @@ struct WalletState {
                            transactions: transactions ?? self.transactions,
                            events: events ?? self.events,
                            swapTransactions: swapTransactions ?? self.swapTransactions,
+                           diceTransactions: diceTransactions ?? self.diceTransactions,
                            parlayBetData: parlayBetData ?? self.parlayBetData,
                            lastBlockTimestamp: lastBlockTimestamp ?? self.lastBlockTimestamp,
                            name: name ?? self.name,

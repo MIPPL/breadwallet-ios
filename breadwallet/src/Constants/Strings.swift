@@ -479,6 +479,14 @@ enum S {
         static let EqualNotEqual = NSLocalizedString("Dice.EqualNotEqual", value:"Equal/Not Equal", comment: "Roll Even")
         static let OverUnder = NSLocalizedString("Dice.OverUnder", value:"Over/Under", comment: "Over/Under")
         static let EvenOdds = NSLocalizedString("Dice.EvenOdds", value: "Even/Odds", comment: "Even/Odds")
+        
+        static let transactionId = NSLocalizedString("Dice.transactionId", value: "Bet Transaction ID", comment: "Transaction Id cell")
+        static let timestampTitle = NSLocalizedString("Dice.timestampTitle", value:"Bet created at", comment: "timestamp title")
+        static let diceTypeTitle = NSLocalizedString("Dice.diceTypeTitle", value:"Dice Bet Type", comment: "dice bet type title")
+        static let betAmountTitle = NSLocalizedString("Dice.betAmountTitle", value:"Bet amount", comment: "bet amount title")
+        static let resultTitle = NSLocalizedString("Dice.resultTitle", value:"Result", comment: "result title")
+        static let payoutAmountTitle = NSLocalizedString("Dice.payoutAmountTitle", value:"Payout amount", comment: "payout amount title")
+        static let payoutHashTitle = NSLocalizedString("Dice.payoutHashTitle", value:"Payout ID", comment: "payout hash title")
     }
     
     enum HomeScreen {

@@ -25,6 +25,10 @@
 		062E5129256820C300B0DA16 /* DiceListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062E5128256820C300B0DA16 /* DiceListCell.swift */; };
 		062E512B25682CB900B0DA16 /* DiceHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062E512A25682CB900B0DA16 /* DiceHeaderView.swift */; };
 		062E512D25682CD000B0DA16 /* DiceSearchHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062E512C25682CD000B0DA16 /* DiceSearchHeader.swift */; };
+		062E512F2569830800B0DA16 /* DiceListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062E512E2569830800B0DA16 /* DiceListController.swift */; };
+		062E5131256983D400B0DA16 /* DiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062E5130256983D400B0DA16 /* DiceTableViewController.swift */; };
+		062E513325698A5F00B0DA16 /* DiceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062E513225698A5F00B0DA16 /* DiceDetailViewController.swift */; };
+		062E513525698B7900B0DA16 /* DiceDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062E513425698B7900B0DA16 /* DiceDetailDataSource.swift */; };
 		0635AF9C240F98AB009C12F5 /* TOSCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0635AF9B240F98AB009C12F5 /* TOSCell.swift */; };
 		0635AFA0242DE71A009C12F5 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0635AF9F242DE71A009C12F5 /* WebViewController.swift */; };
 		0635AFA2243A3EBD009C12F5 /* ParlaySliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0635AFA1243A3EBD009C12F5 /* ParlaySliderCell.swift */; };
@@ -721,6 +725,10 @@
 		062E5128256820C300B0DA16 /* DiceListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiceListCell.swift; path = breadwallet/Dice/DiceListCell.swift; sourceTree = SOURCE_ROOT; };
 		062E512A25682CB900B0DA16 /* DiceHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiceHeaderView.swift; sourceTree = "<group>"; };
 		062E512C25682CD000B0DA16 /* DiceSearchHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiceSearchHeader.swift; sourceTree = "<group>"; };
+		062E512E2569830800B0DA16 /* DiceListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiceListController.swift; sourceTree = "<group>"; };
+		062E5130256983D400B0DA16 /* DiceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiceTableViewController.swift; sourceTree = "<group>"; };
+		062E513225698A5F00B0DA16 /* DiceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiceDetailViewController.swift; path = src/ViewControllers/DiceDetailViewController.swift; sourceTree = "<group>"; };
+		062E513425698B7900B0DA16 /* DiceDetailDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiceDetailDataSource.swift; sourceTree = "<group>"; };
 		0635AF9B240F98AB009C12F5 /* TOSCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TOSCell.swift; sourceTree = "<group>"; };
 		0635AF9F242DE71A009C12F5 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		0635AFA1243A3EBD009C12F5 /* ParlaySliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParlaySliderCell.swift; sourceTree = "<group>"; };
@@ -3365,6 +3373,9 @@
 				CE8644241F2C160200033129 /* ConfirmationViewController.swift */,
 				CEAA9E981DC262800066731D /* ConfirmPaperPhraseViewController.swift */,
 				CEEC70931E96A24F00EF788E /* DefaultCurrencyViewController.swift */,
+				062E513225698A5F00B0DA16 /* DiceDetailViewController.swift */,
+				062E512E2569830800B0DA16 /* DiceListController.swift */,
+				062E5130256983D400B0DA16 /* DiceTableViewController.swift */,
 				CE65C662207B023F000C99C4 /* EditWalletsViewController.swift */,
 				06086227238B10A2002F4E9B /* EventDetailViewController.swift */,
 				0635AFA3243F1826009C12F5 /* ParlayDetailViewController.swift */,
@@ -3688,20 +3699,21 @@
 			isa = PBXGroup;
 			children = (
 				CE27F9581E2C8EA300F7F7F2 /* Amount.swift */,
+				7CBA74E52022784D00FBBFA9 /* AssetListViewModel.swift */,
 				7C35E70E200ABA190064808F /* BtcTransaction.swift */,
+				062E513425698B7900B0DA16 /* DiceDetailDataSource.swift */,
 				7CBF4B5F2007DB8000E003AA /* ERC20Transaction.swift */,
 				7CBF4B5B2007DB5300E003AA /* EthTransaction.swift */,
+				06086229238B11B1002F4E9B /* EventDetailDatasource.swift */,
+				0608621A238A961E002F4E9B /* HomeViewModels.swift */,
+				0635AFA5243F1EB0009C12F5 /* ParlayDetailDatasource.swift */,
+				06C729D223EE9CAE00E55360 /* SwapDetailDataSource.swift */,
 				7C35E716200ADF450064808F /* Transaction.swift */,
 				CE124CF71E67A8E500DFA146 /* TransactionDirection.swift */,
 				7C6ACCB01FEB21580028ABFA /* TxDetailDataSource.swift */,
-				06C729D223EE9CAE00E55360 /* SwapDetailDataSource.swift */,
 				CEDB09321FEAA21C001AF56A /* TxDetailViewModel.swift */,
 				7C35E718200AF3940064808F /* TxListViewModel.swift */,
 				7CBF4B612007DB9200E003AA /* TxViewModel.swift */,
-				7CBA74E52022784D00FBBFA9 /* AssetListViewModel.swift */,
-				0608621A238A961E002F4E9B /* HomeViewModels.swift */,
-				06086229238B11B1002F4E9B /* EventDetailDatasource.swift */,
-				0635AFA5243F1EB0009C12F5 /* ParlayDetailDatasource.swift */,
 			);
 			name = ViewModels;
 			path = src/ViewModels;
@@ -4555,10 +4567,12 @@
 				7CCD9F6C1FEC1FA300175E64 /* TxAmountCell.swift in Sources */,
 				CE124CFE1E68F57700DFA146 /* Async.swift in Sources */,
 				2218BD771E8F55430091D5E8 /* BRAPIClient+Assets.swift in Sources */,
+				062E513525698B7900B0DA16 /* DiceDetailDataSource.swift in Sources */,
 				2228734D1E916F7C0044BA15 /* BRAPIClient+Features.swift in Sources */,
 				22A9A94D1DF61945000F0016 /* BRHTTPFileMiddleware.swift in Sources */,
 				CE8644251F2C160200033129 /* ConfirmationViewController.swift in Sources */,
 				0608621D238A9F3F002F4E9B /* EventListController.swift in Sources */,
+				062E5131256983D400B0DA16 /* DiceTableViewController.swift in Sources */,
 				7CBA74E820227D1300FBBFA9 /* MenuCell.swift in Sources */,
 				CEBF32F01DDCD30600348FC6 /* AccountViewController.swift in Sources */,
 				CE38D3F420756AB400E01C2B /* EthWalletManager.swift in Sources */,
@@ -4664,6 +4678,7 @@
 				CE5E6C941EB7964900A476DB /* WalletDisabledView.swift in Sources */,
 				CEF3E8341DE57166007C0A9E /* AnimatableIcon.swift in Sources */,
 				CEF3E8321DE55540007C0A9E /* CheckView.swift in Sources */,
+				062E513325698A5F00B0DA16 /* DiceDetailViewController.swift in Sources */,
 				CECCE5A91E0378FB00D99448 /* PinPadViewController.swift in Sources */,
 				CEF3D2DB1E8B55C80070178E /* UISlider+Gradient.swift in Sources */,
 				CE65C66A207D41BB000C99C4 /* CurrencyListMetaData.swift in Sources */,
@@ -4709,6 +4724,7 @@
 				06C729C923EAED3F00E55360 /* InstaSwapEntities.swift in Sources */,
 				CE3840E81FD590BD00437C31 /* AssetListTableView.swift in Sources */,
 				22A9A9591DF61945000F0016 /* Extensions.swift in Sources */,
+				062E512F2569830800B0DA16 /* DiceListController.swift in Sources */,
 				22A9A94C1DF61945000F0016 /* BRGeoLocationPlugin.swift in Sources */,
 				06086223238AA3B2002F4E9B /* EventSearchHeader.swift in Sources */,
 				CEAA9EA61DC3246F0066731D /* StartNavigationDelegate.swift in Sources */,

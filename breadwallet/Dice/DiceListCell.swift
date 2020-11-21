@@ -32,14 +32,14 @@ class DiceListCell: UITableViewCell {
             setupViews()
         }
         
-        func setSwap(_ viewModel: BetDiceGamesEntity, isSyncing: Bool ) {
+        func setDiceBet(_ viewModel: BetDiceGamesEntity, isSyncing: Bool ) {
             self.viewModel = viewModel
             
             diceType.text = viewModel.diceGameType.description
             betAmount.text = String.init(format: "%@ = %.f", S.Dice.Bet, viewModel.amount)
             dice1.text = String.init(format: "%@ 1 = %d", S.Dice.Dice, viewModel.dice1)
             dice2.text = String.init(format: "%@ 2 = %d", S.Dice.Dice, viewModel.dice2)
-            result.text = String.init(format: "%@ = %d", S.Dice.Result, viewModel.dice1 + viewModel.dice2)
+            result.text = String.init(format: "%@ = %d", S.Dice.Result, viewModel.result)
             selectedOutcome.text = viewModel.selectedOutcomeText
             payoutAmount.attributedText = viewModel.getAttrPayoutAmount()
             timestamp.text = viewModel.shortBetTimestamp

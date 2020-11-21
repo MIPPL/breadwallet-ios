@@ -35,6 +35,11 @@ class BetCore   {
         assert(false)
     }
     
+    var longBetTimestamp: String {
+        let date = Date(timeIntervalSince1970: timestamp)
+        return DateFormatter.longDateFormatter.string(from: date)
+    }
+    
     var shortBetTimestamp: String {
         let date = Date(timeIntervalSinceReferenceDate: timestamp)
         return DateFormatter.shortDateFormatter.string(from: date)
@@ -687,6 +692,10 @@ class BetQuickGamesEntity : BetCore   {
         self.quickGameType = quickGameType
         super.init(blockheight: blockheight, timestamp: timestamp, txHash: txHash, version: version)
     }
+    
+    var amountTx : String   {
+        return String.init(format: "%.2f WGR", amount/C.satoshis)
+    }
 }
 
 enum BetDiceGameType : Int32 {
@@ -718,7 +727,7 @@ enum BetDiceGameType : Int32 {
     }
 }
 
-class BetDiceGamesEntity : BetQuickGamesEntity   {
+class BetDiceGamesEntity : BetQuickGamesEntity, Equatable   {
     var diceGameType : BetDiceGameType
     var selectedOutcome : Int32
     
@@ -755,5 +764,21 @@ class BetDiceGamesEntity : BetQuickGamesEntity   {
             ret = ""
         }
         return ret
+    }
+    
+    var result : Int32  {
+        return dice1 + dice2
+    }
+    
+    static func ==(lhs: BetDiceGamesEntity, rhs: BetDiceGamesEntity) -> Bool {
+        return  lhs.txHash == rhs.txHash && lhs.payoutTxHash == rhs.payoutTxHash
+    }
+
+    static func !=(lhs: BetDiceGamesEntity, rhs: BetDiceGamesEntity) -> Bool {
+        return !(lhs == rhs)
+    }
+    
+    var title : String {
+        return S.Dice.transactionId + ": " + txHash
     }
 }
