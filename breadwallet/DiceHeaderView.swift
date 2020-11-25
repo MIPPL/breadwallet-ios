@@ -29,6 +29,25 @@ class DiceHeaderView : UIView, GradientDrawable, Subscriber {
     private var regularConstraints: [NSLayoutConstraint] = []
     private var swappedConstraints: [NSLayoutConstraint] = []
     
+    private let equalNotEqual = UIButton(type: .system )
+    private let totalOverUnder = UIButton(type: .system)
+    private let evenOdds = UIButton(type: .system)
+    
+    private let containerEqualNotEqual = UIView()
+    private let containerOverUnder = UIView()
+    
+    private let equalnotequalButtons : [UIButton] = [UIButton].init(repeating: UIButton(type: .system), count: 11)
+    private let overunderButtons : [UIButton] = [UIButton].init(repeating: UIButton(type: .system), count: 10)
+    
+    private let betLeft = UIButton(type: .system)
+    private let betRight = UIButton(type: .system)
+    private let currencyLabel = UILabel(font: .customBody(size: 18.0))
+    
+    private let diceLeft = UIImageView(image: #imageLiteral(resourceName: "BetDice"))
+    private let diceRight = UIImageView(image: #imageLiteral(resourceName: "BetDice"))
+    private let betAmount = UITextField(frame: CGRect(x: 10.0, y: 10.0, width: 250.0, height: 35.0))
+    
+    
     // MARK: Properties
     private let currency: CurrencyDef
     private var hasInitialized = false
@@ -132,6 +151,39 @@ class DiceHeaderView : UIView, GradientDrawable, Subscriber {
         
         let gr = UITapGestureRecognizer(target: self, action: #selector(currencySwitchTapped))
         currencyTapView.addGestureRecognizer(gr)
+        
+        // dice bet buttons
+        equalNotEqual.setTitle(S.Dice.EqualNotEqual, for: .normal)
+        equalNotEqual.tap = {
+            self.containerEqualNotEqual.isHidden = false
+            self.containerOverUnder.isHidden = true
+            self.betLeft.setTitle(S.Dice.Equal, for: .normal)
+            self.betRight.setTitle(S.Dice.NotEqual, for: .normal)
+        }
+        totalOverUnder.setTitle(S.Dice.OverUnder, for: .normal)
+        totalOverUnder.tap = {
+            self.containerEqualNotEqual.isHidden = true
+            self.containerOverUnder.isHidden = false
+            self.betLeft.setTitle(S.Dice.Over, for: .normal)
+            self.betRight.setTitle(S.Dice.Under, for: .normal)
+        }
+        evenOdds.setTitle(S.Dice.EvenOdds, for: .normal)
+        evenOdds.tap = {
+            self.containerEqualNotEqual.isHidden = true
+            self.containerOverUnder.isHidden = true
+            self.betLeft.setTitle(S.Dice.Even, for: .normal)
+            self.betRight.setTitle(S.Dice.Odds, for: .normal)
+        }
+        var n = 2
+        for button in equalnotequalButtons {
+            button.setTitle(String.init(format: "%d", n), for: .normal)
+            n+=1
+        }
+        n = 2
+        for button in overunderButtons {
+            button.setTitle(String.init(format: "%d.5", n), for: .normal)
+            n+=1
+        }
     }
 
     private func addSubviews() {
@@ -144,6 +196,23 @@ class DiceHeaderView : UIView, GradientDrawable, Subscriber {
         addSubview(modeLabel)
         addSubview(syncIndicator)
         addSubview(currencyTapView)
+        addSubview(equalNotEqual)
+        addSubview(totalOverUnder)
+        addSubview(evenOdds)
+        addSubview(containerEqualNotEqual)
+        for button in equalnotequalButtons {
+            containerEqualNotEqual.addSubview( button )
+        }
+        addSubview(containerOverUnder)
+        for button in overunderButtons {
+            containerOverUnder.addSubview( button )
+        }
+        addSubview(diceLeft)
+        addSubview(betLeft)
+        addSubview(betAmount)
+        addSubview(currencyLabel)
+        addSubview(betRight)
+        addSubview(diceRight)
     }
 
     private func addConstraints() {

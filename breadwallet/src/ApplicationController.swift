@@ -370,8 +370,8 @@ class ApplicationController : Subscriber, Trackable {
         
         home.didTapDice = { currency in
             guard let walletManager = self.walletManagers[currency.code] else { return }
-            let swapListController = DiceListController(currency: currency, walletManager: walletManager)
-            nc.pushViewController(swapListController, animated: true)
+            let diceListController = DiceListController(currency: currency, walletManager: walletManager)
+            nc.pushViewController(diceListController, animated: true)
         }
         
         home.didTapBuy = { currency in
