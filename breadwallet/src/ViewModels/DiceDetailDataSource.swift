@@ -135,9 +135,8 @@ extension DiceDetailDataSource: UITableViewDataSource {
             payoutHashCell.set(address: viewModel.payoutTxHash)
         case .timestamp:
             let timestampCell = cell as! TxLabelCell
-            resultCell.value = viewModel.longBetTimestamp        
+            timestampCell.value = viewModel.longBetTimestamp
+        }
         return cell
-
     }
-    
 }

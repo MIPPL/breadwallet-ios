@@ -47,6 +47,10 @@ class DiceHeaderView : UIView, GradientDrawable, Subscriber {
     private let diceRight = UIImageView(image: #imageLiteral(resourceName: "BetDice"))
     private let betAmount = UITextField(frame: CGRect(x: 10.0, y: 10.0, width: 250.0, height: 35.0))
     
+    private var selectedNButton : UIButton?
+    private var selectedN5Button : UIButton?
+    private var previousNButton : UIButton?
+    private var previousN5Button : UIButton?
     
     // MARK: Properties
     private let currency: CurrencyDef
@@ -124,7 +128,7 @@ class DiceHeaderView : UIView, GradientDrawable, Subscriber {
     private func setup() {
         addSubviews()
         addConstraints()
-        //addShadow()
+        addStyles()
         setData()
         addSubscriptions()
     }
@@ -177,13 +181,38 @@ class DiceHeaderView : UIView, GradientDrawable, Subscriber {
         var n = 2
         for button in equalnotequalButtons {
             button.setTitle(String.init(format: "%d", n), for: .normal)
+            button.layer.borderColor = UIColor.gray.cgColor
+            button.tap = {
+                guard button != self.selectedNButton else   {   return }
+                button.layer.borderColor = UIColor.red.cgColor
+                if self.previousNButton != nil   {
+                    self.previousNButton!.layer.borderColor = UIColor.gray.cgColor
+                }
+                self.previousNButton = self.selectedNButton
+                self.selectedNButton = button
+            }
             n+=1
         }
         n = 2
         for button in overunderButtons {
             button.setTitle(String.init(format: "%d.5", n), for: .normal)
+            button.layer.borderColor = UIColor.gray.cgColor
+            button.tap = {
+                guard button != self.selectedN5Button else   {   return }
+                button.layer.borderColor = UIColor.red.cgColor
+                if self.previousN5Button != nil   {
+                    self.previousN5Button!.layer.borderColor = UIColor.gray.cgColor
+                }
+                self.previousN5Button = self.selectedN5Button
+                self.selectedN5Button = button
+            }
             n+=1
         }
+        
+        // initial buton status
+        equalNotEqual.tap!()
+        equalnotequalButtons[0].tap!()
+        overunderButtons[0].tap!()
     }
 
     private func addSubviews() {
@@ -196,6 +225,8 @@ class DiceHeaderView : UIView, GradientDrawable, Subscriber {
         addSubview(modeLabel)
         addSubview(syncIndicator)
         addSubview(currencyTapView)
+        
+        // dice controls
         addSubview(equalNotEqual)
         addSubview(totalOverUnder)
         addSubview(evenOdds)
@@ -274,13 +305,68 @@ class DiceHeaderView : UIView, GradientDrawable, Subscriber {
             syncIndicator.topAnchor.constraint(equalTo: balanceLabel.topAnchor),
             syncIndicator.bottomAnchor.constraint(equalTo: balanceLabel.bottomAnchor)
             ])
+        
+        // Dice controls
+        equalNotEqual.constrain([
+            equalNotEqual.leadingAnchor.constraint(equalTo: leadingAnchor, constant: C.padding[1]),
+            equalNotEqual.topAnchor.constraint(equalTo: balanceLabel.bottomAnchor, constant: C.padding[1])
+            ])
+        
+        totalOverUnder.constrain([
+            totalOverUnder.leadingAnchor.constraint(equalTo: equalNotEqual.trailingAnchor, constant: C.padding[2]),
+            totalOverUnder.topAnchor.constraint(equalTo: balanceLabel.bottomAnchor, constant: C.padding[1])
+            ])
+        
+        evenOdds.constrain([
+            evenOdds.leadingAnchor.constraint(equalTo: totalOverUnder.trailingAnchor, constant: C.padding[2]),
+            evenOdds.topAnchor.constraint(equalTo: balanceLabel.bottomAnchor, constant: C.padding[1])
+            ])
+        
+        containerEqualNotEqual.constrain([
+            containerEqualNotEqual.leadingAnchor.constraint(equalTo: leadingAnchor),
+            containerEqualNotEqual.topAnchor.constraint(equalTo: equalNotEqual.bottomAnchor, constant: C.padding[1])
+            ])
+        
+        containerOverUnder.constrain([
+            containerOverUnder.leadingAnchor.constraint(equalTo: leadingAnchor),
+            containerOverUnder.topAnchor.constraint(equalTo: equalNotEqual.bottomAnchor, constant: C.padding[1])
+            ])
+        
+        diceLeft.constrain([
+            diceLeft.leadingAnchor.constraint(equalTo: leadingAnchor, constant: C.padding[1]),
+            diceLeft.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -C.padding[1])
+            ])
+        
+        betLeft.constrain([
+            betLeft.leadingAnchor.constraint(equalTo: diceLeft.trailingAnchor, constant: C.padding[1]),
+            betLeft.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -C.padding[1])
+            ])
+        
+        betAmount.constrain([
+            betAmount.leadingAnchor.constraint(equalTo: betLeft.trailingAnchor, constant: C.padding[1]),
+            betAmount.trailingAnchor.constraint(equalTo: currencyLabel.leadingAnchor, constant: -C.padding[1]),
+            betAmount.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -C.padding[1])
+            ])
+        
+        currencyLabel.constrain([
+            currencyLabel.trailingAnchor.constraint(equalTo: betRight.leadingAnchor, constant: -C.padding[1]),
+            currencyLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -C.padding[1])
+            ])
+        
+        betRight.constrain([
+           betRight.trailingAnchor.constraint(equalTo: diceRight.leadingAnchor, constant: C.padding[1]),
+           betRight.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -C.padding[1])
+           ])
+        
+        diceRight.constrain([
+            diceRight.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -C.padding[1]),
+            diceRight.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -C.padding[1])
+            ])
     }
 
-    private func addShadow() {
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-        layer.shadowOpacity = 0.15
-        layer.shadowRadius = 8.0
+    private func addStyles() {
+        diceLeft.tintColor = .white
+        diceRight.tintColor = .white
     }
 
     private func addSubscriptions() {

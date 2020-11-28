@@ -68,31 +68,36 @@ class DiceListCell: UITableViewCell {
         private func addConstraints() {
             timestamp.constrain([
                 timestamp.topAnchor.constraint(equalTo: contentView.topAnchor, constant: C.padding[1]),
-                timestamp.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: C.padding[2])])
-            descriptionLabel.constrain([
-                descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: C.padding[1]),
-                descriptionLabel.trailingAnchor.constraint(equalTo: timestamp.trailingAnchor)])
-            pendingConstraints = [
-                descriptionLabel.centerYAnchor.constraint(equalTo: status.centerYAnchor),
-                descriptionLabel.leadingAnchor.constraint(equalTo: status.trailingAnchor, constant: C.padding[1]),
-                descriptionLabel.heightAnchor.constraint(equalToConstant: 48.0)]
-            completeConstraints = [
-                descriptionLabel.topAnchor.constraint(equalTo: timestamp.bottomAnchor),
-                descriptionLabel.leadingAnchor.constraint(equalTo: timestamp.leadingAnchor),]
-            status.constrain([
-                status.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-                status.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: C.padding[2])])
-            amount.constrain([
-                amount.topAnchor.constraint(equalTo: contentView.topAnchor),
-                amount.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-                amount.leadingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor, constant: C.padding[6]),
-                amount.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -C.padding[2])])
+                timestamp.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -C.padding[2])])
+            diceType.constrain([
+                diceType.topAnchor.constraint(equalTo: contentView.topAnchor, constant: C.padding[1]),
+                diceType.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: C.padding[2])])
+            dice1.constrain([
+                dice1.topAnchor.constraint(equalTo: diceType.bottomAnchor, constant: C.padding[1]),
+                dice1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: C.padding[2])])
+            dice2.constrain([
+                dice2.topAnchor.constraint(equalTo: dice1.bottomAnchor, constant: C.padding[1]),
+                dice2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: C.padding[2])])
+            betAmount.constrain([
+                betAmount.topAnchor.constraint(equalTo: contentView.topAnchor, constant: C.padding[1]),
+                betAmount.leadingAnchor.constraint(equalTo: diceType.trailingAnchor, constant: C.padding[2])])
+            selectedOutcome.constrain([
+                selectedOutcome.topAnchor.constraint(equalTo: betAmount.bottomAnchor, constant: C.padding[1]),
+                selectedOutcome.leadingAnchor.constraint(equalTo: betAmount.leadingAnchor, constant: C.padding[2])])
+            result.constrain([
+                result.topAnchor.constraint(equalTo: selectedOutcome.bottomAnchor, constant: C.padding[1]),
+                result.leadingAnchor.constraint(equalTo: betAmount.leadingAnchor, constant: C.padding[2])])
+            payoutAmount.constrain([
+                   payoutAmount.topAnchor.constraint(equalTo: timestamp.bottomAnchor, constant: C.padding[2]),
+                   payoutAmount.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -C.padding[3])])
+            
             separator.constrainBottomCorners(height: 0.5)
         }
         
         private func setupStyle() {
             selectionStyle = .none
             payoutAmount.textAlignment = .right
+            payoutAmount.textColor = .receivedGreen
             payoutAmount.setContentHuggingPriority(.required, for: .horizontal)
             timestamp.setContentHuggingPriority(.required, for: .vertical)
         }
