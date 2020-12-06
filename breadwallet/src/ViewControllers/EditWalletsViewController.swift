@@ -148,7 +148,7 @@ class EditWalletsViewController : UIViewController {
 
     private func setAddModel(storedCurrencies: [CurrencyDef]) {
         model = storedCurrencies.filter { !self.metaData.previouslyAddedTokenAddresses.contains(($0 as! ERC20Token).address)}.map{($0, true)}
-        allModels = model
+        allModels = model  
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -10,7 +10,7 @@ import UIKit
 import BRCore
 import MachO
 
-let diceHeaderHeight: CGFloat = 152.0
+let diceHeaderHeight: CGFloat = 312.0
 
 class DiceListController : UIViewController, Subscriber {
 
