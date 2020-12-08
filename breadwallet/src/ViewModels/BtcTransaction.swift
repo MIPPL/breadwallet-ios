@@ -34,8 +34,7 @@ struct WgrTransactionInfo {
         let currHeight = wm.peerManager!.lastBlockHeight
         
         let opCodeManager = WagerrOpCodeManager();
-        
-        ent = opCodeManager.getEventIdFromCoreTx( (tx.getRawTransactionRef())  )
+        ent = opCodeManager.getEventIdFromCoreTx( (tx.getRawTransactionRef())  ) 
         if ent == nil {
             // results in block - 1 rule is no longer enforced (testnet July 2020), show generic "payout" then use API for tx detail
             callback( WgrTransactionInfo(tx: tx, ent: ent, res: res, event: event, currHeight: currHeight) )
@@ -208,7 +207,7 @@ struct WgrTransactionInfo {
         }
         else    {   // regular bet
             let eventID = self.betEntity!.eventID
-            if eventID == 0 {
+            if eventID == 0 && self.betEntity!.parlayBet != nil {
                 txDesc = String.init(format: "MULTI (%d)", self.betEntity!.parlayBet!.eventID.count )
                 txDate = "STAKE"
             }

@@ -503,7 +503,7 @@ enum BetTransactionType : Int32 {
     case EVENT_PEERLESS_TOTAL = 0x0a
     case EVENT_PATCH = 0x0b
     case BET_PARLAY = 0x0c
-    case BET_NEW = 0x0d
+    case BET_QUICK_GAMES = 0x0d
     case UNKNOWN = -1
 }
 
@@ -681,16 +681,12 @@ enum BetQuickGameType : Int32 {
     case UNKNOWN = -1
 }
 
-class BetQuickGamesEntity : BetCore   {
-    var type : BetType
+class BetQuickGamesEntity : BetEntity   {
     var quickGameType : BetQuickGameType
-    var amount : UInt64
-
+    
     init(blockheight: UInt64, timestamp: TimeInterval, txHash: String, version: UInt32, amount: UInt64, quickGameType: BetQuickGameType) {
-        self.type = BetType.QUICK_GAMES
-        self.amount = amount
         self.quickGameType = quickGameType
-        super.init(blockheight: blockheight, timestamp: timestamp, txHash: txHash, version: version)
+        super.init(blockheight: blockheight, timestamp: timestamp, txHash: txHash, version: version, type: BetType.QUICK_GAMES, eventID: 0, outcome: BetOutcome.UNKNOWN, amount: amount)
     }
     
     var amountTx : String   {
@@ -748,8 +744,9 @@ class BetDiceGamesEntity : BetQuickGamesEntity, Equatable   {
     }
     
     func getAttrPayoutAmount() -> NSAttributedString  {
-        let tsAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.receivedGreen]
-        let ret = NSMutableAttributedString(string: String.init(format: "%.2f WGR", payoutAmount/C.satoshis), attributes: tsAttrs)
+        let payoutText : String = payoutAmount > 0 ? String.init(format: "%.2f WGR", payoutAmount/C.satoshis) : "N/A"
+        let tsAttrs: [NSAttributedString.Key: Any] = payoutAmount > 0 ? [.foregroundColor: UIColor.receivedGreen] : [.foregroundColor: UIColor.colorDraw]
+        let ret = NSMutableAttributedString(string: payoutText, attributes: tsAttrs)
         return ret
     }
     

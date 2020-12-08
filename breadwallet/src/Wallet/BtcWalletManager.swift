@@ -59,6 +59,11 @@ class BTCWalletManager : WalletManager {
             db?.loadEvents(0, Date(timeIntervalSinceNow: 12 * 60.0).timeIntervalSinceReferenceDate, callback: { events in
                 Store.perform(action: WalletChange(self.currency).setEvents(events as! [BetEventViewModel]))
             })
+            
+            db?.loadDiceBets(callback: { diceBets in
+                Store.perform(action: WalletChange(self.currency).setDiceTransactions(diceBets as! [BetDiceGamesEntity] ) )
+            })
+            
         }
     }
 
@@ -218,6 +223,11 @@ extension BTCWalletManager : BRWalletListener {
 
     func txAdded(_ tx: BRTxRef) {
         db?.txAdded(tx)
+        
+        // check if dice bet and store
+        let opCodeManager = WagerrOpCodeManager();
+        guard let ent = opCodeManager.getEventIdFromCoreTx( tx ) as? BetDiceGamesEntity else { return }
+        db?.saveBetDiceGame(ent)
     }
 
     func txUpdated(_ txHashes: [UInt256], blockHeight: UInt32, timestamp: UInt32) {
@@ -307,6 +317,10 @@ extension BTCWalletManager : BRWalletListener {
                     Store.perform(action: WalletChange(myself.currency).setTransactions(transactions))
                 }
             }
+            
+            myself.db?.loadDiceBets(callback: { diceBets in
+                Store.perform(action: WalletChange(myself.currency).setDiceTransactions(diceBets as! [BetDiceGamesEntity] ) )
+            })
         }
     }
 

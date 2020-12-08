@@ -81,7 +81,7 @@ class DiceTableViewController : UITableViewController, Subscriber, Trackable {
         tableView.register(DiceListCell.self, forCellReuseIdentifier: headerCellIdentifier)
 
         tableView.separatorStyle = .none
-        tableView.estimatedRowHeight = 80.0
+        tableView.estimatedRowHeight = 90.0
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.backgroundColor = .whiteBackground
         
@@ -132,7 +132,7 @@ class DiceTableViewController : UITableViewController, Subscriber, Trackable {
     }
     
     private func setContentInset() {
-        let insets = UIEdgeInsets(top: accountHeaderHeight - 64.0 - (E.isIPhoneX ? 0.0 : 0.0), left: 0, bottom: accountFooterHeight + C.padding[2], right: 0)
+        let insets = UIEdgeInsets(top: diceHeaderHeight - 64.0 - (E.isIPhoneX ? 0.0 : 0.0), left: 0, bottom: C.padding[2], right: 0)
         tableView.contentInset = insets
         tableView.scrollIndicatorInsets = insets
     }

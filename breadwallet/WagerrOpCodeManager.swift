@@ -26,6 +26,15 @@ private struct OpcodesPosition {
     static let PARLAY_EVENT_ARRAY = 6
 }
 
+private struct QuickGamesOpcodesConstants {
+    static let TYPE1_LENGTH = 5
+    static let TYPE2_LENGTH = 1
+    static let TYPE_POS = 5
+    static let VECTORLEN_POS = 6
+    static let DICE_TYPE_POS = 7
+    static let OUTCOME_POS = 8
+}
+
 private struct OpcodesLength {
     static let PEERLESS_LENGHT = 37
     static let RESULT_LENGHT = 10
@@ -46,7 +55,7 @@ class WagerrOpCodeManager   {
     
     func getEventIdFromCoreTx(_ tx : BRTxRef) -> BetEntity?      {
         var ret : BetEntity?
-        let betAmount : UInt64 = 0
+        var betAmount : UInt64 = 0
         //var betOutput : BRTxOutput
 
         for output in tx.outputs    {
@@ -56,6 +65,7 @@ class WagerrOpCodeManager   {
             let opcode = script[OpcodesPosition.OPCODE] & 0xFF;
             let test = script[OpcodesPosition.SMOKE_TEST] & 0xFF;
             if (opcode == OpcodeBytes.OP_RETURN && test == OpcodeBytes.SMOKE_TEST) {       // found wagerr bet tx!
+                betAmount = output.amount
                 let type = script[OpcodesPosition.BTX] & 0xFF;
                 let txType = BetTransactionType(rawValue: Int32(type))!
                 switch (txType) {
@@ -76,6 +86,13 @@ class WagerrOpCodeManager   {
                             ret = betEntity;
                         };
                         break;
+                    
+                    case .BET_QUICK_GAMES:
+                        getDiceGameBet(tx, script, betAmount) { betEntity in
+                            ret = betEntity;
+                        };
+                        break;
+                    
                     default:
                         break;
                 }
@@ -286,6 +303,40 @@ class WagerrOpCodeManager   {
         }
         
         completion(betEntity)
+    }
+    
+    func getDiceGameBet(_ tx : BRTxRef,_ script : UnsafeMutableBufferPointer<UInt8>,_ amount: UInt64, callback: @escaping (BetDiceGamesEntity?)->Void )
+    {
+        let betEntity : BetDiceGamesEntity?;
+        
+        let txHash : String = tx.txHash.description;
+        
+        let version = script[OpcodesPosition.VERSION] & 0xFF;   // ignore value so far
+        let nQuickGameType = script[QuickGamesOpcodesConstants.TYPE_POS] & 0xFF;
+        let gameType = BetQuickGameType(rawValue: Int32(nQuickGameType) )
+        let vectorLen = script[QuickGamesOpcodesConstants.VECTORLEN_POS] & 0xFF;
+        let nDiceGameType = script[QuickGamesOpcodesConstants.DICE_TYPE_POS] & 0xFF;
+        let diceGameType = BetDiceGameType(rawValue:Int32(nDiceGameType) )
+        
+        var nSelectedOutcome : Int32 = 0
+        
+        if diceGameType == BetDiceGameType.EVEN || diceGameType == BetDiceGameType.ODDS {
+            guard vectorLen == QuickGamesOpcodesConstants.TYPE2_LENGTH else {
+                callback(nil)
+                return
+            }
+        }
+        else    {
+            guard vectorLen == QuickGamesOpcodesConstants.TYPE1_LENGTH else {
+                callback(nil)
+                return
+            }
+            let pos = PositionPointer( Int(QuickGamesOpcodesConstants.OUTCOME_POS) );
+            nSelectedOutcome = Int32(getBuffer( script, pos ))
+        }
+        
+        betEntity = BetDiceGamesEntity(blockheight: UInt64(tx.blockHeight), timestamp: tx.timestamp, txHash: txHash, version: UInt32(version), amount: amount,  diceGameType: diceGameType!, selectedOutcome: nSelectedOutcome)
+        callback(betEntity);
     }
     
     func getUpdateOdds(_ tx : BRTxRef,_ script : UnsafeMutableBufferPointer<UInt8>, callback: @escaping (BetEventDatabaseModel?)->Void )

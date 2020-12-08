@@ -1030,6 +1030,36 @@ class CoreDatabase {
     }
 
     // dice games insert and update
+    func loadDiceBets(callback: @escaping ([BetDiceGamesEntity?])->Void) {
+        var ret = [BetDiceGamesEntity?]()
+        var sql: OpaquePointer? = nil
+        sqlite3_prepare_v2(self.db, "select Z_PK, ZTYPE, ZVERSION, ZTIMESTAMP, ZHEIGHT, ZTXHASH, ZQUICKGAMETYPE, ZDICEGAMETYPE, ZAMOUNT, ZSELECTEDOUTCOME, ZDICE1, ZDICE2, ZPAYOUTAMOUNT, ZPAYOUTTXHASH from WGR_DICEGAME", -1, &sql, nil)
+        defer { sqlite3_finalize(sql) }
+
+        while sqlite3_step(sql) == SQLITE_ROW {
+            let diceBet = BetDiceGamesEntity(blockheight: UInt64(sqlite3_column_int(sql, 4)),
+                                             timestamp: TimeInterval(UInt64(bitPattern: sqlite3_column_int64(sql, 3))),
+                                             txHash: String(cString: sqlite3_column_text(sql, 5)),
+                                             version: UInt32(bitPattern: sqlite3_column_int(sql, 2)),
+                                             amount: UInt64(bitPattern: sqlite3_column_int64(sql, 8)),
+                                             diceGameType: BetDiceGameType( rawValue: Int32(bitPattern: UInt32(sqlite3_column_int(sql, 7))) )!,
+                                             selectedOutcome: sqlite3_column_int(sql, 9) )
+            
+            diceBet.dice1 = sqlite3_column_int(sql, 10)
+            diceBet.dice2 = sqlite3_column_int(sql, 11)
+            diceBet.payoutAmount = UInt64(bitPattern: sqlite3_column_int64(sql, 12))
+            diceBet.payoutTxHash = String(cString: sqlite3_column_text(sql, 13))
+            
+            ret.append(diceBet)
+        }
+        
+        if sqlite3_errcode(self.db) != SQLITE_DONE { print("SQLITE error loadDiceBet: " + String(cString: sqlite3_errmsg(self.db))) }
+        
+        DispatchQueue.main.async {
+            callback(ret)
+        }
+    }
+
     func saveBetDiceGame(_ ent: BetDiceGamesEntity) {
         queue.async {
             var sql0: OpaquePointer? = nil
@@ -1054,7 +1084,7 @@ class CoreDatabase {
             var sql2: OpaquePointer? = nil
             sqlite3_prepare_v2(self.db, "insert or rollback into WGR_DICEGAME " +
                 "(Z_PK, ZTYPE, ZVERSION, ZTIMESTAMP, ZHEIGHT, ZTXHASH, ZQUICKGAMETYPE, ZDICEGAMETYPE, ZAMOUNT, ZSELECTEDOUTCOME ) " +
-                "values (\(pk + 1), \(ent.type.rawValue), \(ent.version),  \(ent.timestamp), \(ent.blockheight), '\(ent.txHash)', \(ent.quickGameType.rawValue), \(ent.diceGameType.rawValue), \(ent.amount), \(ent.selectedOutcome) ", -1, &sql2, nil)
+                "values (\(pk + 1), \(ent.type.rawValue), \(ent.version),  \(ent.timestamp), \(ent.blockheight), '\(ent.txHash)', \(ent.quickGameType.rawValue), \(ent.diceGameType.rawValue), \(ent.amount), \(ent.selectedOutcome) )", -1, &sql2, nil)
             defer { sqlite3_finalize(sql2) }
             
             guard sqlite3_step(sql2) == SQLITE_DONE else {
@@ -1077,7 +1107,7 @@ class CoreDatabase {
     
     func updateBetDiceGame(_ ent: BetDiceGamesEntity) {
         queue.async {
-            sqlite3_exec(self.db, "update or rollback WGR_DICEGAME set ZDICE1 = \(ent.dice1), ZDICE2 = \(ent.dice2), ZPAYOUTAMOUNT = \(ent.payoutAmount), ZPAYOUTTXHASH = '\(ent.payoutTxHash)' where ZTXHASH = '\(ent.txHash)'", nil, nil, nil)
+            sqlite3_exec(self.db, "update or rollback WGR_DICEGAME set ZHEIGHT = \(ent.blockheight), ZDICE1 = \(ent.dice1), ZDICE2 = \(ent.dice2), ZPAYOUTAMOUNT = \(ent.payoutAmount), ZPAYOUTTXHASH = '\(ent.payoutTxHash)' where ZTXHASH = '\(ent.txHash)'", nil, nil, nil)
             
             guard sqlite3_errcode(self.db) == SQLITE_OK else {
                 print("SQLITE error updateBetDiceGame: " + String(cString: sqlite3_errmsg(self.db)))

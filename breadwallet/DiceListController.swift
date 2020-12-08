@@ -12,7 +12,7 @@ import MachO
 
 let diceHeaderHeight: CGFloat = 312.0
 
-class DiceListController : UIViewController, Subscriber {
+class DiceListController : UIViewController, Subscriber, Trackable {
 
     //MARK: - Public
     let currency: CurrencyDef
@@ -20,7 +20,11 @@ class DiceListController : UIViewController, Subscriber {
     init(currency: CurrencyDef, walletManager: WalletManager) {
         self.walletManager = walletManager
         self.currency = currency
-        self.headerView = DiceHeaderView(currency: currency)
+        
+        let kvStore = (walletManager.apiClient?.kv)!
+        let sender = currency.createSender(walletManager: walletManager, kvStore: kvStore)
+        self.headerView = DiceHeaderView(currency: currency, walletManager: walletManager as! BTCWalletManager, sender: sender as! BitcoinSender)
+        
         super.init(nibName: nil, bundle: nil)
         self.transactionsTableView = DiceTableViewController(currency: currency, walletManager: walletManager, didSelectBet: didSelectBet)
 
@@ -29,9 +33,26 @@ class DiceListController : UIViewController, Subscriber {
         } else {
             headerView.isWatchOnly = false
         }
+        
+        headerView.presentVerifyPin = { [weak self] bodyText, success in
+            guard let myself = self else { return }
+            let wm = myself.walletManager as! BTCWalletManager
+            let vc = VerifyPinViewController(bodyText: bodyText, pinLength: Store.state.pinLength, walletManager: wm, success: success)
+            vc.transitioningDelegate = self!.headerView.verifyPinTransitionDelegate
+            vc.modalPresentationStyle = .overFullScreen
+            vc.modalPresentationCapturesStatusBarAppearance = true
+            //nc.pushViewController(vc, animated: true)
+            self?.present(vc, animated: true, completion: nil)
+        }
+        headerView.onPublishSuccess = { [weak self] in
+            self?.presentAlert(.sendSuccess, completion: {})
+        }
+        headerView.doPresentConfirm = self.presentConfirmation
+        headerView.doSend = self.doSend
     }
-
+    
     //MARK: - Private
+    private let alertHeight: CGFloat = 260.0
     private let walletManager: WalletManager
     private let headerView: DiceHeaderView
     private let transitionDelegate = ModalTransitionDelegate(type: .transactionDetail)
@@ -53,7 +74,7 @@ class DiceListController : UIViewController, Subscriber {
             }
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // detect jailbreak so we can throw up an idiot warning, in viewDidLoad so it can't easily be swizzled out
@@ -88,6 +109,41 @@ class DiceListController : UIViewController, Subscriber {
         transactionDetails.modalPresentationCapturesStatusBarAppearance = true
         present(transactionDetails, animated: true, completion: nil)
     }
+    
+    private func presentConfirmation(vc : ConfirmationViewController) {
+        present(vc, animated: true, completion: nil)
+    }
+    
+    private func doSend()   {
+        let pinVerifier: PinVerifier = { [weak self] pinValidationCallback in
+            self!.headerView.presentVerifyPin?(S.VerifyPin.authorize) { pin in
+                pinValidationCallback(pin)
+            }
+        }
+        
+        headerView.sender.sendTransaction(allowBiometrics: true, pinVerifier: pinVerifier) { [weak self] result in
+            guard let `self` = self else { return }
+            switch result {
+            case .success:
+                self.dismiss(animated: true, completion: {
+                    Store.trigger(name: .showStatusBar)
+                    self.headerView.onPublishSuccess?()
+                })
+                self.saveEvent("send.success")
+            case .creationError(let message):
+                self.showAlert(title: S.Send.createTransactionError, message: message, buttonLabel: S.Button.ok)
+                self.saveEvent("send.publishFailed", attributes: ["errorMessage": message])
+            case .publishFailure(let error):
+                if case .posixError(let code, let description) = error {
+                    self.showAlert(title: S.Alerts.sendFailure, message: "\(description) (\(code))", buttonLabel: S.Button.ok)
+                    self.saveEvent("send.publishFailed", attributes: ["errorMessage": "\(description) (\(code))"])
+                }
+            case .insufficientGas(let rpcErrorMessage):
+                self.saveEvent("send.publishFailed", attributes: ["errorMessage": rpcErrorMessage])
+            }
+        }
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -224,6 +280,45 @@ class DiceListController : UIViewController, Subscriber {
 
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .slide
+    }
+
+    private func presentAlert(_ type: AlertType, completion: @escaping ()->Void) {
+        let alertView = AlertView(type: type)
+        let window = UIApplication.shared.keyWindow!
+        let size = window.bounds.size
+        window.addSubview(alertView)
+
+        let topConstraint = alertView.constraint(.top, toView: window, constant: size.height)
+        alertView.constrain([
+            alertView.constraint(.width, constant: size.width),
+            alertView.constraint(.height, constant: alertHeight + 25.0),
+            alertView.constraint(.leading, toView: window, constant: nil),
+            topConstraint ])
+        window.layoutIfNeeded()
+
+        UIView.spring(0.6, animations: {
+            topConstraint?.constant = size.height - self.alertHeight
+            window.layoutIfNeeded()
+        }, completion: { _ in
+            alertView.animate()
+            UIView.spring(0.6, delay: 2.0, animations: {
+                topConstraint?.constant = size.height
+                window.layoutIfNeeded()
+            }, completion: { _ in
+                //TODO - Make these callbacks generic
+                if case .paperKeySet(let callback) = type {
+                    callback()
+                }
+                if case .pinSet(let callback) = type {
+                    callback()
+                }
+                if case .sweepSuccess(let callback) = type {
+                    callback()
+                }
+                completion()
+                alertView.removeFromSuperview()
+            })
+        })
     }
 
     required init?(coder aDecoder: NSCoder) {

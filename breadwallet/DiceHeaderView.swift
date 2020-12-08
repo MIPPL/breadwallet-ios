@@ -71,6 +71,15 @@ class DiceHeaderView : UIView, GradientDrawable, Subscriber, UITextFieldDelegate
     private let currency: CurrencyDef
     private var hasInitialized = false
     private var hasSetup = false
+    private var walletManager : BTCWalletManager
+    
+    var sender: BitcoinSender
+    let verifyPinTransitionDelegate = PinTransitioningDelegate()
+    let confirmTransitioningDelegate = PinTransitioningDelegate()
+    var presentVerifyPin: ((String, @escaping ((String) -> Void))->Void)?
+    var onPublishSuccess: (()->Void)?
+    var doPresentConfirm: ((ConfirmationViewController) -> Void)?
+    var doSend: (()->Void)?
     
     // MARK: - Accessors
     public var amount: String {
@@ -131,9 +140,11 @@ class DiceHeaderView : UIView, GradientDrawable, Subscriber, UITextFieldDelegate
 
     // MARK: -
     
-    init(currency: CurrencyDef) {
+    init(currency: CurrencyDef, walletManager : BTCWalletManager, sender: BitcoinSender) {
         self.currency = currency
         self.isBtcSwapped = Store.state.isBtcSwapped
+        self.walletManager = walletManager
+        self.sender = sender
         if let rate = currency.state?.currentRate {
             let placeholderAmount = Amount(amount: 0, currency: currency, rate: rate)
             self.exchangeRate = rate
@@ -452,6 +463,14 @@ class DiceHeaderView : UIView, GradientDrawable, Subscriber, UITextFieldDelegate
             n+=1
         }
         
+        betLeft.tap = {
+            self.didTapBet(bLeft: true)
+        }
+        
+        betRight.tap = {
+            self.didTapBet(bLeft: false)
+        }
+        
         // initial buton status
         equalnotequalButtons[0].tap!()
         overunderButtons[0].tap!()
@@ -460,19 +479,31 @@ class DiceHeaderView : UIView, GradientDrawable, Subscriber, UITextFieldDelegate
         // potential reward
         potentialRewardTitle.text = S.Dice.PotentialReward
     }
-
+ 
     private func updatePotentialReward()    {
+        let newAmount = validateBetAmount()
+        if newAmount != ""  {
+            amount = newAmount
+        }
+        
+        let potentialRewardData = potentialReward(stake: Int(Double(amount)!))
+        potentialRewardLeft.text = String.init(format: "%@ (%@)", potentialRewardData.cryptoAmountLeft, potentialRewardData.fiatAmountLeft)
+        potentialRewardRight.text = String.init(format: "%@ (%@)", potentialRewardData.cryptoAmountRight, potentialRewardData.fiatAmountRight)
+    }
+    
+    // returns "" if valid, else if there is a new proposed amount
+    private func validateBetAmount() -> String    {
+        var ret : String = ""
+        
         let balanceAmount = (Currencies.btc.state?.balance!.asUInt64)!/C.satoshis
         let minBet = Int(W.BetAmount.min)
         let maxBet = min(W.BetAmount.max, Float(balanceAmount) )
         let nAmount = Int( Double(amount) ?? Double(minBet) )
 
-        if (nAmount <= minBet)  { amount = String(minBet) }
-        if (Float(nAmount) > maxBet)  { amount = String(Int(maxBet)) }
+        if (nAmount <= minBet)  { ret = String(minBet) }
+        if (Float(nAmount) > maxBet)  { ret = String(Int(maxBet)) }
         
-        let potentialRewardData = potentialReward(stake: Int(Double(amount)!))
-        potentialRewardLeft.text = String.init(format: "%@ (%@)", potentialRewardData.cryptoAmountLeft, potentialRewardData.fiatAmountLeft)
-        potentialRewardRight.text = String.init(format: "%@ (%@)", potentialRewardData.cryptoAmountRight, potentialRewardData.fiatAmountRight)
+        return ret
     }
     
     func potentialReward(stake: Int) -> (cryptoAmountLeft: String, fiatAmountLeft: String, cryptoAmountRight: String, fiatAmountRight: String )   {
@@ -487,8 +518,8 @@ class DiceHeaderView : UIView, GradientDrawable, Subscriber, UITextFieldDelegate
         
         case totalOverUnder:
             guard let nIdx = overunderButtons.index(of: selectedN5Button!) else { return ( "","","","" ) }
-            oddLeft = rewardOverUnder[nIdx]
-            oddRight = rewardOverUnder[9-nIdx]
+            oddLeft = rewardOverUnder[9-nIdx]
+            oddRight = rewardOverUnder[nIdx]
         
         case evenOdds:
             oddLeft = rewardEvenOdd
@@ -569,6 +600,91 @@ class DiceHeaderView : UIView, GradientDrawable, Subscriber, UITextFieldDelegate
         button.titleEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
     }
 
+    private func getDiceGameType( bLeft : Bool ) -> BetDiceGameType   {
+        var ret : BetDiceGameType
+        
+        switch selectedBetButton    {
+        case equalNotEqual:     ret = bLeft ? BetDiceGameType.EQUAL : BetDiceGameType.NOT_EQUAL
+        case totalOverUnder:    ret = bLeft ? BetDiceGameType.TOTAL_OVER : BetDiceGameType.TOTAL_UNDER
+        case evenOdds:          ret = bLeft ? BetDiceGameType.EVEN : BetDiceGameType.ODDS
+        case .none:             ret = BetDiceGameType.UNKNOWN
+        case .some(_):          ret = BetDiceGameType.UNKNOWN
+        }
+        return ret
+    }
+    
+    private func getSelectedOutcome() -> Int32  {
+        var ret : Int32 = 2 // default
+        
+        switch selectedBetButton {
+        case equalNotEqual:     ret = Int32(equalnotequalButtons.index(of: selectedNButton!)! + 2)
+        case totalOverUnder:    ret = Int32(overunderButtons.index(of: selectedN5Button!)! + 2)
+        case evenOdds:          ret = 2
+        case .none:             ret = 2
+        case .some(_):          ret = 2
+        }
+        return ret
+    }
+    
+    private func getSelectedOutcomeText() -> String  {
+        var ret : String = ""
+        
+        switch selectedBetButton {
+        case equalNotEqual:     ret = selectedNButton?.currentTitle ?? ""
+        case totalOverUnder:    ret = selectedN5Button?.currentTitle ?? ""
+        case evenOdds:          ret = ""
+        case .none:             ret = ""
+        case .some(_):          ret = ""
+        }
+        return ret
+    }
+    
+    func didTapBet( bLeft: Bool ) {
+        let betAmount = validateBetAmount()
+        guard betAmount != "" else { return }
+        
+        guard !(currency.state?.isRescanning ?? false) else {
+            let alert = UIAlertController(title: S.Alert.error, message: S.Send.isRescanning, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: S.Button.ok, style: .cancel, handler: nil))
+            present(alert: alert)
+            return
+        }
+        
+        let diceGameType = getDiceGameType(bLeft: bLeft)
+        let cryptoAmount = UInt256(UInt64(betAmount)! * C.satoshis)
+        let transaction = walletManager.wallet?.createDiceBetTransaction(forAmount: (UInt64(betAmount)!*C.satoshis), type: BetType.QUICK_GAMES.rawValue, diceGameType: diceGameType.rawValue, selectedOutcome: getSelectedOutcome() )
+
+        self.sender.setBetTransaction(tx: transaction)
+        
+        let fee = sender.fee(forAmount: cryptoAmount) ?? UInt256(0)
+        let feeCurrency = Currencies.btc
+        let currency = Currencies.btc
+        
+        let displyAmount = Amount(amount: cryptoAmount,
+                                  currency: currency,
+                                  rate: currency.state?.currentRate,
+                                  maximumFractionDigits: Amount.highPrecisionDigits)
+        let feeAmount = Amount(amount: fee,
+                               currency: feeCurrency,
+                               rate: (currency.state?.currentRate != nil) ? feeCurrency.state?.currentRate : nil,
+                               maximumFractionDigits: Amount.highPrecisionDigits)
+
+        let confirm = ConfirmationViewController(amount: Amount(amount: cryptoAmount, currency: currency),
+                                                 fee: feeAmount,
+                                                 feeType: .regular,
+                                                 address: String.init(format: "%@ (%@ %@)", S.Dice.Dice, diceGameType.description, getSelectedOutcomeText() ),
+                                                 isUsingBiometrics: sender.canUseBiometrics,
+                                                 currency: currency)
+        confirm.successCallback = doSend
+        confirm.cancelCallback = sender.reset
+        
+        confirmTransitioningDelegate.shouldShowMaskView = false
+        confirm.transitioningDelegate = confirmTransitioningDelegate
+        confirm.modalPresentationStyle = .overFullScreen
+        confirm.modalPresentationCapturesStatusBarAppearance = true
+        doPresentConfirm!(confirm)
+    }
+    
     private func addSubscriptions() {
         Store.lazySubscribe(self,
                             selector: { $0.isBtcSwapped != $1.isBtcSwapped },
@@ -719,6 +835,10 @@ class DiceHeaderView : UIView, GradientDrawable, Subscriber, UITextFieldDelegate
         textField.resignFirstResponder()
         updatePotentialReward()
         return true
+    }
+    
+    private func present(alert: UIAlertController) {
+        Store.trigger(name: .showAlert(alert))
     }
     
     required init?(coder aDecoder: NSCoder) {

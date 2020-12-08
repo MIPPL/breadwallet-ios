@@ -36,11 +36,11 @@ class DiceListCell: UITableViewCell {
             self.viewModel = viewModel
             
             diceType.text = viewModel.diceGameType.description
-            betAmount.text = String.init(format: "%@ = %.f", S.Dice.Bet, viewModel.amount)
-            dice1.text = String.init(format: "%@ 1 = %d", S.Dice.Dice, viewModel.dice1)
-            dice2.text = String.init(format: "%@ 2 = %d", S.Dice.Dice, viewModel.dice2)
+            betAmount.text = String.init(format: "%@ = %.2f", S.Dice.Bet, viewModel.amount/C.satoshis)
+            dice1.text = String.init(format: "%@ 1 = %@", S.Dice.Dice, viewModel.dice1 > 0 ? String(viewModel.dice1) : "N/A" )
+            dice2.text = String.init(format: "%@ 2 = %@", S.Dice.Dice, viewModel.dice2 > 0 ? String(viewModel.dice2) : "N/A" )
             result.text = String.init(format: "%@ = %d", S.Dice.Result, viewModel.result)
-            selectedOutcome.text = viewModel.selectedOutcomeText
+            selectedOutcome.text = String.init(format: "%@ %@", S.Dice.SelectedOutcome, viewModel.selectedOutcomeText)
             payoutAmount.attributedText = viewModel.getAttrPayoutAmount()
             timestamp.text = viewModel.shortBetTimestamp
         }
@@ -68,7 +68,7 @@ class DiceListCell: UITableViewCell {
         private func addConstraints() {
             timestamp.constrain([
                 timestamp.topAnchor.constraint(equalTo: contentView.topAnchor, constant: C.padding[1]),
-                timestamp.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -C.padding[2])])
+                timestamp.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -C.padding[3])])
             diceType.constrain([
                 diceType.topAnchor.constraint(equalTo: contentView.topAnchor, constant: C.padding[1]),
                 diceType.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: C.padding[2])])
@@ -80,13 +80,13 @@ class DiceListCell: UITableViewCell {
                 dice2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: C.padding[2])])
             betAmount.constrain([
                 betAmount.topAnchor.constraint(equalTo: contentView.topAnchor, constant: C.padding[1]),
-                betAmount.leadingAnchor.constraint(equalTo: diceType.trailingAnchor, constant: C.padding[2])])
+                betAmount.leadingAnchor.constraint(equalTo: dice1.trailingAnchor, constant: C.padding[4])])
             selectedOutcome.constrain([
                 selectedOutcome.topAnchor.constraint(equalTo: betAmount.bottomAnchor, constant: C.padding[1]),
-                selectedOutcome.leadingAnchor.constraint(equalTo: betAmount.leadingAnchor, constant: C.padding[2])])
+                selectedOutcome.leadingAnchor.constraint(equalTo: betAmount.leadingAnchor)])
             result.constrain([
                 result.topAnchor.constraint(equalTo: selectedOutcome.bottomAnchor, constant: C.padding[1]),
-                result.leadingAnchor.constraint(equalTo: betAmount.leadingAnchor, constant: C.padding[2])])
+                result.leadingAnchor.constraint(equalTo: betAmount.leadingAnchor)])
             payoutAmount.constrain([
                    payoutAmount.topAnchor.constraint(equalTo: timestamp.bottomAnchor, constant: C.padding[2]),
                    payoutAmount.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -C.padding[3])])
