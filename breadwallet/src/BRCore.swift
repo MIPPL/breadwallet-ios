@@ -279,8 +279,12 @@ extension UnsafeMutablePointer where Pointee == BRTransaction {
         return self.pointee.txHash
     }
     
-    var version: UInt32 {
+    var version: UInt16 {
         return self.pointee.version
+    }
+    
+    var type: UInt16 {
+        return self.pointee.type
     }
     
     var inputs: [BRTxInput] {
