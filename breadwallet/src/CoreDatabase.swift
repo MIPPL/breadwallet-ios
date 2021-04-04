@@ -265,7 +265,7 @@ class CoreDatabase {
 
             if count != txHashes.count {
                 print("Fewer tx records updated than hashes! This causes tx to go missing!")
-                exit(0) // DIE! DIE! DIE!
+                //exit(0) // DIE! DIE! DIE!
             }
         }
     }

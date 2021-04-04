@@ -68,7 +68,7 @@ struct BtcTransaction: Transaction {
         var direction: TransactionDirection
         if amountSent > 0 && (amountReceived + fee) == amountSent {
             direction = .moved
-        } else if amountSent > 0 {
+        } else if amountSent > (amountReceived + fee) {
             direction = .sent
         } else {
             direction = .received
