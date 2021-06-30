@@ -94,33 +94,52 @@ extension BRAPIClient {
         task.resume()
     }
 
-    func FetchCoinRate(_ handler: @escaping (RatesResult) -> Void) {
-        let cmcKey = "ff739a52-e81a-45e7-9369-d2138187e1a3"
-        let urlString = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=BBP&CMC_PRO_API_KEY=\(cmcKey)"
-        var ret = [Rate]()
+    func extractFromXMLTag( message: String, tag: String) -> String {
+        var ret : String = ""
         
-        guard let requestUrl = URL(string:urlString) else { return handler(.error("BBP rate not found")) }
+        guard let index = message.index(of: "<\(tag)>"),
+            let index2 = message.index(of: "</\(tag)>") else { return "" }
+
+        let startindex = message.index(index, offsetBy: tag.count+2)
+        let endindex = message.index(index2, offsetBy: -1)
+        let substring = message[startindex...endindex]
+        ret = String(substring)
+        return ret
+    }
+    
+    func FetchCoinRate(_ handler: @escaping (RatesResult) -> Void) {
+        let urlString = "https://foundation.biblepay.org/Server?action="
+        let qsBBP = "BBP_PRICE_QUOTE"
+        let qsBTC = "BTC_PRICE_QUOTE"
+        var ret = [Rate]()
+        var bbpRate : Double?
+        var btcRate : Double?
+        
+        guard let requestUrl = URL(string:urlString+qsBBP) else { return handler(.error("BBP rate not found")) }
         let request = URLRequest(url:requestUrl)
-        let task = URLSession.shared.dataTask(with: request) {
+        URLSession.shared.dataTask(with: request) {
             (data, response, error) in
-            if error == nil,let usableData = data {
-                do  {
-                    let json = try? JSONSerialization.jsonObject(with: usableData, options: []) as? [String : Any]
-                    guard let bbpdata = json?!["data"] as? [String : Any] else { handler(.error("CMC API: data object not found")); return }
-                    guard let bbpobj = bbpdata["BBP"] as? [String : Any] else { handler(.error("CMC API: BBP object not found")); return }
-                    guard let bbpQuote = bbpobj["quote"] as? [String : Any] else { handler(.error("CMC API: quote object not found")); return }
-                    guard let bbpUSD = bbpQuote["USD"] as? [String : Any] else { handler(.error("CMC API: USD object not found")); return }
-                    guard let coinrate = bbpUSD["price"] as? Double else {
-                        return
+            if error == nil,let _ = data {
+                guard let data = data else { return }
+                let message = String(data: data, encoding: .utf8)!
+                bbpRate = Double( self.extractFromXMLTag(message: message, tag: "MIDPOINT") )
+                
+                // BTC rate
+                guard let requestUrl2 = URL(string:urlString+qsBTC) else { return handler(.error("BTC rate not found")) }
+                let request2 = URLRequest(url:requestUrl2)
+                URLSession.shared.dataTask(with: request2) {
+                    (data2, response2, error2) in
+                    if error2 == nil,let _ = data2 {
+                        guard let data2 = data2 else { return }
+                        let message2 = String(data: data2, encoding: .utf8)!
+                        btcRate = Double( self.extractFromXMLTag(message: message2, tag: "MIDPOINT") )
                     }
-                    ret.append(Rate(code: Currencies.btc.code, name: Currencies.btc.name, rate: coinrate, reciprocalCode:"USD"))
-                    handler(.success(ret))
-                } catch let error as NSError {
-                    print("Failed to load: \(error.localizedDescription)")
-                }
+                }.resume()
+                let bbpUSD = (bbpRate ?? 0.00000001) / (btcRate ?? 60000)
+                ret.append(Rate(code: Currencies.btc.code, name: Currencies.btc.name, rate: bbpUSD, reciprocalCode:"USD"))
+                handler(.success(ret))
             }
-        }
-        task.resume()
+        }.resume()
         return
     }
 

@@ -210,7 +210,7 @@ extension BRKey {
         if count < sig.count { sig.removeSubrange(sig.count...) }
         return sig
     }
-
+    
     mutating func verify(md: UInt256, sig: [UInt8]) -> Bool {
         var sig = sig
         return BRKeyVerify(&self, md, &sig, sig.count) != 0
